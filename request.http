@@ -7,7 +7,7 @@
 #   "phoneNumber" : "+918950406539"
 # }
 
-POST http://localhost:3000/resend
+POST http://localhost:3000/protected
 Content-Type: application/json
 
 {
