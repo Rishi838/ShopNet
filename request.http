@@ -1,10 +1,20 @@
-# GET https://jsonplaceholder.typicode.com/posts/1 HTTP/1.1
+# GET http://localhost:3000/
 
-# POST https://jsonplaceholder.typicode.com/posts HTTP/1.1
-# Content-Type: "application/json"
+# POST http://localhost:3000/send
+# Content-Type: application/json
 
 # {
-#   "title": "foo",
-#   "body": "bar",
-#   "userId": 1
+#   "phoneNumber" : "+918950406539"
 # }
+
+POST http://localhost:3000/resend
+Content-Type: application/json
+
+{
+  "name" : "Rishi Dhingra",
+  "email" : "rishidhingra04@gmail.com",
+  "password" : "Talanted@123"
+
+}
+
+# GET http://localhost:3000/verify?email=rishidhingra04@gmail.com&token=827607
