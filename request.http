@@ -7,14 +7,27 @@
 #   "phoneNumber" : "+918950406539"
 # }
 
-POST http://localhost:3000/protected
+# POST http://localhost:3000/login
+# Content-Type: application/json
+
+# {
+   
+# }
+
+POST http://localhost:3000/add_to_cart
 Content-Type: application/json
 
 {
-  "name" : "Rishi Dhingra",
-  "email" : "rishidhingra04@gmail.com",
-  "password" : "Talanted@123"
-
+   "items" : [
+    {
+        "productId" : "64ab115fee2856dcd11db65c",
+        "quantity" : 4
+    },
+    {
+        "productId" :"64ab0d46acf6f52991822b07",
+        "quantity" : 4
+    }
+   ]
 }
 
-# GET http://localhost:3000/verify?email=rishidhingra04@gmail.com&token=827607
+#  GET http://localhost:3000/verify?email=rdrishi97@gmail.com&token=148555

@@ -7,7 +7,6 @@ const verifyTokenAndRefresh = async (req, res, next) => {
   try {
     // Extract the access token from the cookies of request
     const AccessToken = req.cookies.access_token;
-
     // Check if the token is provided or not
     if (!AccessToken) {
       return res.status(401).json({ error: "No token provided" });
@@ -15,24 +14,23 @@ const verifyTokenAndRefresh = async (req, res, next) => {
 
     // Verify the access token
     jwt.verify(
-        AccessToken,
+      AccessToken,
       process.env.ACCESS_TOKEN_PRIVATE_KEY,
       async (err, decoded) => {
         if (err) {
+          console.log(err);
           // Token is expired or invalid
           if (err.name === "TokenExpiredError") {
             try {
               // Retrieve the refresh token from the request body or headers
-              const refreshToken = req.cookies.refresh_token
-        
+
+              const refreshToken = req.cookies.refresh_token;
 
               if (!refreshToken) {
-                return res
-                  .status(401)
-                  .json({
-                    error:
-                      "Access token expired or invalid. Please provide a refresh token.",
-                  });
+                return res.status(401).json({
+                  error:
+                    "Access token expired or invalid. Please provide a refresh token.",
+                });
               }
 
               // Verify the refresh token
@@ -42,7 +40,7 @@ const verifyTokenAndRefresh = async (req, res, next) => {
               );
 
               // Retrieve the user associated with the refresh token
-              const user = await User.findOne({Email:refreshDecoded.email});
+              const user = await User.findOne({ Email: refreshDecoded.email });
 
               if (!user) {
                 return res.status(401).json({ error: "Invalid refresh token" });
@@ -51,7 +49,7 @@ const verifyTokenAndRefresh = async (req, res, next) => {
               // Generate a new access token
               const newAccessToken = jwt.sign(
                 { email: user.Email },
-                ACCESS_TOKEN_PRIVATE_KEY,
+                process.env.ACCESS_TOKEN_PRIVATE_KEY,
                 { expiresIn: "9000s" }
               );
 
@@ -61,7 +59,7 @@ const verifyTokenAndRefresh = async (req, res, next) => {
                 httpOnly: true,
                 sameSite: "lax",
               });
-              req.user = user
+              req.user = user;
               next();
             } catch (error) {
               if (error.name === "JsonWebTokenError") {
@@ -72,12 +70,14 @@ const verifyTokenAndRefresh = async (req, res, next) => {
             }
           } else {
             // Token is invalid
+
             return res.status(401).json({ error: "Invalid token" });
           }
         } else {
           // Token is valid
           // Retrieve the user associated with the token
-          const user = await User.findOne({Email:decoded.email});
+
+          const user = await User.findOne({ Email: decoded.email });
 
           if (!user) {
             return res.status(401).json({ error: "Invalid token" });

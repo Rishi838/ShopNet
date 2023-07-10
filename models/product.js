@@ -12,18 +12,22 @@ mongoose
   });
 //Creating a new schema
 const productschema = new mongoose.Schema({
-  name: {
+  Name: {
     type: String,
     required: true,
   },
-  price: {
+  Price: {
     type: Number,
     required: true,
   },
-  description: {
+  Description: {
     type: String,
     required: true,
   },
+  Category : {
+    type : String,
+    required :true
+  }
 });
 const collection = new mongoose.model("Products", productschema);
 module.exports = collection;

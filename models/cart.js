@@ -4,32 +4,24 @@ require("dotenv").config();
 mongoose
   .connect(process.env.DB)
   .then(() => {
-    console.log("Products Database connected");
+    console.log("Cart Database connected");
   })
   .catch((e) => {
     console.log(e);
-    console.log("Products Database Falied");
+    console.log("Cart Database Falied");
   });
 //Creating a new schema
-const productschema = new mongoose.Schema({
+const cartchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true,
+    required: true
   },
-  items: [
-    {
-      productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-        required: true,
-      },
-      quantity: {
-        type: Number,
-        default: 1,
-      },
-    },
-  ],
+  items: {
+    type: Object,
+    required : true,
+    default : {}
+  }
 });
-const collection = new mongoose.model("Products", productschema);
+const collection = new mongoose.model("Carts", cartchema);
 module.exports = collection;
