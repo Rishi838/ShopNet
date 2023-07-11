@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
-// Connecting to database 
+// Connecting to database
 mongoose
   .connect(process.env.DB)
   .then(() => {
@@ -32,6 +32,15 @@ const orderSchema = new mongoose.Schema({
   ],
   totalAmount: {
     type: Number,
+    required: true,
+  },
+  paymentVerified: {
+    type: Boolean,
+    required: true,
+    default : false
+  },
+  billingAddress: {
+    type: String,
     required: true,
   },
   createdAt: {
