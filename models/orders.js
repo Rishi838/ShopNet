@@ -30,6 +30,12 @@ const orderSchema = new mongoose.Schema({
       },
     },
   ],
+  status : {
+   type: String,
+   required : true,
+   enum : ["Unverified" ,"Inventory" , "Shipped" ,"OutForDelievery" , "Delierverd", "Cancel"],
+   default : "Unverified",
+  },
   totalAmount: {
     type: Number,
     required: true,
@@ -47,6 +53,10 @@ const orderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  captureId : {
+    type: String,
+    default : ""
+  }
 });
 const collection = new mongoose.model("Orders", orderSchema);
 module.exports = collection;

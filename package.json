@@ -4,7 +4,7 @@
   "description": "This is my project under intern at celebal technologies",
   "main": "server.js",
   "scripts": {
-    "start": "npm start",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

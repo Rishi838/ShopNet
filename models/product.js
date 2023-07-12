@@ -27,6 +27,10 @@ const productschema = new mongoose.Schema({
   Category : {
     type : String,
     required :true
+  },
+  image : {
+    data : Buffer,
+    contentType : String
   }
 });
 const collection = new mongoose.model("Products", productschema);

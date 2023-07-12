@@ -13,10 +13,10 @@ module.exports.order_place = async (req, res) => {
       products: req.body.items,
       totalAmount: 15,
       shippingAddress: req.body.address,
+      captureId: ""
     });
     // Generate an access token for merchant or buisness id
     const accessToken = await generateAccessToken();
-    console.log(accessToken)
     // Set up the API request body
     const requestBody = {
       intent: "CAPTURE",
@@ -43,11 +43,9 @@ module.exports.order_place = async (req, res) => {
     );
 
     // Extract the PayPal Order ID from the response
-    console.log(response.data)
     const paypalOrderId = response.data.id;
-    console.log("order placed" , order._id)
     // Return the PayPal Order ID to the frontend
-   return res.status(404).json({ orderId: paypalOrderId ,orderDatabaseId : order._id });
+    return res.status(404).json({ orderId: paypalOrderId, orderDatabaseId: order._id });
   } catch (error) {
     console.error("Error initiating payment:", error);
     // Handle any errors during the payment initiation process
@@ -62,21 +60,7 @@ module.exports.payment_verify = async (req, res) => {
     // Generate access token
     const accessToken = await generateAccessToken();
 
-    // Make the API request to get the payment details and check what is the current status of the payment
-    const response = await axios.get(
-      `https://api.sandbox.paypal.com/v2/checkout/orders/${paypalOrderId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-
-    // Check the payment status from the response
-    const status = response.data.status;
-    console.log(status)
-    //  If the payment status is approved that means we now need to move one step further
-    if (status === "APPROVED") {
+  
       // Hit capture api to verify the payment
       const response = await axios.post(
         `https://api.sandbox.paypal.com/v2/checkout/orders/${paypalOrderId}/capture`,
@@ -88,37 +72,120 @@ module.exports.payment_verify = async (req, res) => {
           },
         }
       );
+      
       // Check the payment status from the response
       const status = response.data.status;
-      console.log(status)
       if (status === "COMPLETED") {
         // Update the order status in database to verified
-        console.log(orderDatabaseId)
-        const update_status = await orders.findOne({_id : orderDatabaseId})
-        console.log(update_status)
-        update_status.paymentVerified = true
-        await update_status.save()
-        console.log(update_status)
+        const result = await orders.findOne({ _id: orderDatabaseId })
+        result.paymentVerified = true
+        result.status = "Inventory"
+        result.captureId = response.data.purchase_units[0].payments.captures[0].id
+        await result.save()
         // Payment captured successfully
         console.log("True")
         return res.status(200).json({ success: true });
       } else {
         // Payment capture failed
-       return  res.status(500).json({ success: false });
-      }
-    } else {
-      // Payment verification failed
-      return res.status(500).json({ success: false });
-    }
+        return res.status(500).json({ success: false });
+      } 
   } catch (error) {
     console.error("Error verifying payment:", error);
     // Handle any errors during the payment verification process
-  return res
+    return res
       .status(500)
       .json({ success: false, error: "Payment verification error" });
   }
 };
+module.exports.get_single_order_details = async (req, res) => {
+  try {
+    const orderId = req.params.orderId
+    const userId = req.user._id
 
+    if(!orderId)
+    return res.status(404).json({message : "Please specify the order Id"})
+
+    const result = await orders.findOne({ _id: orderId, user: userId })
+    if (!result)
+      return res.status(400).json({ message:"No Order with the given id is asociated with this user"})
+    else {
+      return res.status(200).json({ "Products": result.products, "Ammount": result.totalAmount,status : result.status, "Address": result.shippingAddress, "Order Date": result.createdAt })
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(400).json({ message: "Server Error" })
+  }
+}
+module.exports.cancel_order = async(req,res) => {
+  try {
+    const orderId = req.params.orderId
+    const userId = req.user._id
+
+    if(!orderId)
+    return res.status(404).json({message : "Please specify the order Id to be canceled"})
+
+    const result = await orders.findOne({ _id: orderId, user: userId })
+    if (!result)
+      return res.status(400).json({ message:"No Order with the given id is asociated with this user"})
+    else {
+      result.status = "Cancel"
+      result.paymentVerified=false
+      const captureId = result.captureId
+      const accessToken = await generateAccessToken(); 
+      const response = await axios.post(
+        `https://api.sandbox.paypal.com/v2/payments/captures/${captureId}/refund`,
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`, 
+          },
+        }
+      ); 
+      console.log("payment refunded",response.data)
+      // console.log(response.data)
+      await result.save()
+      return res.status(200).json({orderId : result._id , message : "Your order has been successfully Canceled" })
+    }
+  } catch (err) {
+    console.log(err.data)
+    res.status(400).json({ message: "Server Error" })
+  }
+}
+module.exports.get_all_order_details = async (req,res) =>{
+  try{
+    const userId = req.user._id
+    const result = await orders.find({"user" : userId})
+    res.status(200).json({message : "Details Fetched Successfully", orders : result})
+
+  }catch(err)
+  {
+    console.log(err)
+    res.status(404).json({message : "Server Error Occured"})
+  }
+}
+
+module.exports.change_status = async(req,res) =>{
+  try {
+    const orderId = req.params.orderId
+    const userId = req.user._id
+    const status = req.body.status
+    if(!orderId)
+    return res.status(404).json({message : "Please specify the order Id to be canceled"})
+
+    const result = await orders.findOne({ _id: orderId, user: userId })
+    if (!result)
+      return res.status(400).json({ message:"No Order with the given id is asociated with this user"})
+    else {
+      result.status = status
+      await result.save()
+      return res.status(200).json({orderId : result._id , message : `Your Order Status Has Changed to ${status}` })
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(400).json({ message: "Server Error" })
+  }
+}
 // Function to generate access token for our merchant id
 async function generateAccessToken() {
   // Hitting the paypal api to generate access token
@@ -135,6 +202,6 @@ async function generateAccessToken() {
       },
     }
   );
-// Return the access token returned by the api
+  // Return the access token returned by the api
   return response.data.access_token;
 }

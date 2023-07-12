@@ -7,20 +7,18 @@
 #   "phoneNumber" : "+918950406539"
 # }
 
-POST http://localhost:3000/signup
-Content-Type: application/json
-
-{
-   "name" : "Rishi",
-   "email" : "rishidhingra04@gmail.com",
-   "password" : "Talanted@123"
-}
-
-# POST http://localhost:3000/api/payments/verify
+# POST http://localhost:3000/orders/cancel/64ae92bf8a2554ed9c43d7aa
 # Content-Type: application/json
 
 # {
-#     "orderId": "310466636V337452L"
+  
 # }
+
+POST http://localhost:3000/add_product
+Content-Type: application/json
+
+{
+    
+}
 
 #  GET http://localhost:3000/verify?email=rdrishi97@gmail.com&token=148555
