@@ -21,10 +21,13 @@ app.set("view engine", "ejs")
 // setting path for ejs files
 app.set("views", path.join("./Frontend/views"))
 // Setting path to render css
-app.use(express.static(__dirname));
-
+app.use(express.static(path.join(__dirname)));
 
 const port = process.env.PORT || 8080
+
+app.get('/',(req,res)=>{
+  res.render('home')
+})
 
 
 // Using auth routes in our server files which take access from routes folder

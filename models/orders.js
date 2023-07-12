@@ -39,7 +39,7 @@ const orderSchema = new mongoose.Schema({
     required: true,
     default : false
   },
-  billingAddress: {
+  shippingAddress: {
     type: String,
     required: true,
   },

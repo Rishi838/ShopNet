@@ -145,12 +145,12 @@ module.exports.verify = async (req, res) => {
     user.IsEmailVerified = true;
     // Creating access and refresh token
     const access_token = await jwt.sign(
-      { email: req.body.email },
+      { email: req.query.email },
       process.env.ACCESS_TOKEN_PRIVATE_KEY,
       { expiresIn: "9000s" }
     );
     const refresh_token = await jwt.sign(
-      { email: req.body.email },
+      { email: req.query.email },
       process.env.REFRESH_TOKEN_PRIVATE_KEY
     );
     user.RefreshToken = refresh_token;

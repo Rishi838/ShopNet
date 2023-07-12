@@ -11,14 +11,12 @@ const verifyTokenAndRefresh = async (req, res, next) => {
     if (!AccessToken) {
       return res.status(401).json({ error: "No token provided" });
     }
-
     // Verify the access token
     jwt.verify(
       AccessToken,
       process.env.ACCESS_TOKEN_PRIVATE_KEY,
       async (err, decoded) => {
         if (err) {
-          console.log(err);
           // Token is expired or invalid
           if (err.name === "TokenExpiredError") {
             try {
@@ -78,11 +76,9 @@ const verifyTokenAndRefresh = async (req, res, next) => {
           // Retrieve the user associated with the token
 
           const user = await User.findOne({ Email: decoded.email });
-
           if (!user) {
             return res.status(401).json({ error: "Invalid token" });
           }
-
           // Attach the user object to the request for further use
           req.user = user;
 

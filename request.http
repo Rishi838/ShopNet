@@ -7,27 +7,20 @@
 #   "phoneNumber" : "+918950406539"
 # }
 
-# POST http://localhost:3000/login
-# Content-Type: application/json
-
-# {
-   
-# }
-
-POST http://localhost:3000/add_to_cart
+POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-   "items" : [
-    {
-        "productId" : "64ab115fee2856dcd11db65c",
-        "quantity" : 4
-    },
-    {
-        "productId" :"64ab0d46acf6f52991822b07",
-        "quantity" : 4
-    }
-   ]
+   "name" : "Rishi",
+   "email" : "rishidhingra04@gmail.com",
+   "password" : "Talanted@123"
 }
+
+# POST http://localhost:3000/api/payments/verify
+# Content-Type: application/json
+
+# {
+#     "orderId": "310466636V337452L"
+# }
 
 #  GET http://localhost:3000/verify?email=rdrishi97@gmail.com&token=148555
