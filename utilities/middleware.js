@@ -9,7 +9,7 @@ const verifyTokenAndRefresh = async (req, res, next) => {
     const AccessToken = req.cookies.access_token;
     // Check if the token is provided or not
     if (!AccessToken) {
-      return res.status(401).json({ error: "No token provided" });
+      return res.status(401).json({ error: "No token provided" ,validate:0});
     }
     // Verify the access token
     jwt.verify(
@@ -28,6 +28,7 @@ const verifyTokenAndRefresh = async (req, res, next) => {
                 return res.status(401).json({
                   error:
                     "Access token expired or invalid. Please provide a refresh token.",
+                    validate:0
                 });
               }
 
@@ -41,7 +42,7 @@ const verifyTokenAndRefresh = async (req, res, next) => {
               const user = await User.findOne({ Email: refreshDecoded.email });
 
               if (!user) {
-                return res.status(401).json({ error: "Invalid refresh token" });
+                return res.status(401).json({ error: "Invalid refresh token" ,validate:0 });
               }
 
               // Generate a new access token
@@ -61,15 +62,15 @@ const verifyTokenAndRefresh = async (req, res, next) => {
               next();
             } catch (error) {
               if (error.name === "JsonWebTokenError") {
-                return res.status(401).json({ error: "Invalid refresh token" });
+                return res.status(401).json({ error: "Invalid refresh token" ,validate:0});
               }
               console.log("Error refreshing token:", error);
-              res.status(500).json({ error: "Server error" });
+              res.status(500).json({ error: "Server error",validate:0 });
             }
           } else {
             // Token is invalid
 
-            return res.status(401).json({ error: "Invalid token" });
+            return res.status(401).json({ error: "Invalid token",validate:0 });
           }
         } else {
           // Token is valid
@@ -77,7 +78,7 @@ const verifyTokenAndRefresh = async (req, res, next) => {
 
           const user = await User.findOne({ Email: decoded.email });
           if (!user) {
-            return res.status(401).json({ error: "Invalid token" });
+            return res.status(401).json({ error: "Invalid token",validate:0 });
           }
           // Attach the user object to the request for further use
           req.user = user;
@@ -88,7 +89,7 @@ const verifyTokenAndRefresh = async (req, res, next) => {
     );
   } catch (error) {
     console.log("Error verifying token:", error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error" ,validate:0});
   }
 };
 

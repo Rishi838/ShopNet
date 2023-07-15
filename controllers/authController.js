@@ -21,7 +21,7 @@ module.exports.signup = async (req, res) => {
     if (!req.body.email || !req.body.password || !req.body.name)
       return res
         .status(404)
-        .json({ message: "Enter All credentials properly" });
+        .json({ success:-1 ,message: "Enter All credentials properly" });
     //   Existing user check
     const check = await user_login.findOne({ Email: req.body.email });
     // If user already exists,return status 400
@@ -65,19 +65,19 @@ module.exports.signup = async (req, res) => {
     mailTransporter.sendMail(mailDetails, function (err, data) {
       if (err) {
         return res.status(400).json({
-          success: 1,
+          success: -1,
           message: "Email Don't Exist, Enter a Valid Email",
         });
       } else {
         return res.status(200).json({
           otp: x,
-          success: 2,
+          success: 1,
           message: "Authentication mail sent successfully",
         });
       }
     });
   } catch (error) {
-    return res.status(400).json({ success: 1, message: "Email Dont Exist" });
+    return res.status(400).json({ success: -1, message: "Email Dont Exist" });
   }
 };
 module.exports.login = async (req, res) => {
@@ -88,7 +88,7 @@ module.exports.login = async (req, res) => {
     //   Existing user check
     const user = await user_login.findOne({ Email: req.body.email });
     if (!user) {
-      return res.staus(404).json({ success: 0, message: "NO Such User" });
+      return res.status(404).json({ success: 0, message: "NO Such User" });
     }
     // Cheking Password is correct or not
     const compare_pass = await bcrypt.compare(
@@ -123,7 +123,7 @@ module.exports.login = async (req, res) => {
       sameSite: "lax",
     });
     // Returning token
-    return res.status(200).json({ message: "User Logged in succcessfully" });
+    return res.status(200).json({ success:2,message: "User Logged in succcessfully" });
   } catch (error) {
     console.log(error);
     return res.json({ success: 3, message: "Some Error Occured" });
@@ -165,13 +165,7 @@ module.exports.verify = async (req, res) => {
       httpOnly: true,
       sameSite: "lax",
     });
-    return res
-      .status(200)
-      .json({
-        success: 0,
-        message:
-          "Email Verified Successfully and access token and refresh token are returned as cookie",
-      });
+    return res.render('verify')
   } catch (error) {
     console.log(error);
     return res
@@ -245,3 +239,6 @@ module.exports.logout = async (req, res) => {
   res.clearCookie("access_token");
   return res.status(200).json({ message: "User Logged out successfully" });
 };
+module.exports.validate = async(req,res) =>{
+  return res.status(200).json({message:"User Validated Successfully",validate : 1})
+}

@@ -28,7 +28,15 @@ const port = process.env.PORT || 8080
 app.get('/',(req,res)=>{
   res.render('home')
 })
-
+app.get('/auth',(req,res)=>{
+  res.render('auth')
+})
+app.get('/cart',(req,res)=>{
+  res.render('cart')
+})
+app.get('/orders',(req,res)=>{
+  res.render('orders')
+})
 
 // Using auth routes in our server files which take access from routes folder
 app.use(authRoutes)

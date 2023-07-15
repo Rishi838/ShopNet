@@ -21,6 +21,10 @@ const cartchema = new mongoose.Schema({
     type: Object,
     required : true,
     default : {}
+  },
+  total:{
+    type:Number,
+    default:0
   }
 });
 const collection = new mongoose.model("Carts", cartchema);

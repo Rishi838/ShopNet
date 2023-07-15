@@ -7,4 +7,8 @@ router.post('/add_to_cart', middleware, cartController.addtocart);
 
 router.post('/fetch_cart',middleware,cartController.fetchcart)
 
+router.post('/remove_from_cart',middleware,cartController.removeFromCart)
+
+router.post('/change_quantity',middleware , cartController.changeQuantity )
+
 module.exports = router;

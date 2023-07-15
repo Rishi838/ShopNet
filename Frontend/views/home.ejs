@@ -1,27 +1,79 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>PayPal Integration</title>
-  <script src="https://www.paypal.com/sdk/js?client-id=AdjZfCG4rNaA4umpKRk4QZqqatOZZOCbxUh76usvi2hvvUn1fZrANpuuZMJHFQBPt7js3DpTI1w-tONS"></script>
-</head>
-<body>
-  
-  <h1>PayPal Integration Example</h1>
-  <button id="payment-button">Make Payment</button>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Frontend/stylesheet/home.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600&family=Varela+Round&display=swap"
+        rel="stylesheet"> -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AdjZfCG4rNaA4umpKRk4QZqqatOZZOCbxUh76usvi2hvvUn1fZrANpuuZMJHFQBPt7js3DpTI1w-tONS"></script>
+    <title>Document</title>
+  </head>
 
-  <script>
-    // Replace YOUR_SERVER_URL with the actual URL of your backend server
-    <!-- const SERVER_URL = 'YOUR_SERVER_URL'; -->
+  <body>
+    <!-- Navbar starts here -->
+    <header class="header-area">
+      <!-- site-navbar start -->
+      <div class="navbar-area">
+        <div class="container">
+          <nav class="site-navbar">
+            <!-- site logo -->
+            <a href="/" class="site-logo">SHOPNET</a>
 
-    // Function to initiate the payment
-    
-    // Execute the initiatePayment function when the payment button is clicked
-    document.getElementById('payment-button').addEventListener('click', () => {
-      initiatePayment();
-    });
-    
-  </script>
+            <!-- site menu/nav -->
+            <ul>
+              <li><a href="/cart">Cart</a></li>
+              <li><a href="/orders">Orders</a></li>
+              <li><a href="/wishlist">WishList</a></li>
+              <li><a href="/auth" id="auth">Authenticate</a></li>
+              <li><a href="/auth" id="profile">Profile</a></li>
+            </ul>
 
-  <div id="paypal-button-container"></div>
-</body>
+            <!-- nav-toggler for mobile version only -->
+            <button class="nav-toggler">
+              <span></span>
+            </button>
+          </nav>
+        </div>
+      </div>
+      <!-- navbar-area end -->
+    </header>
+    <!-- Navbar ends here -->
+
+    <!-- Carousel effect html starts here -->
+    <!-- <div id="carousel" data-auto="true">
+        <div id="scene">
+            <img class="carousel_item" src="./Frontend/stylesheet/media/7.png" alt="">
+            <img class="carousel_item" src="./Frontend/stylesheet/media/6.png" alt="">
+            <img class="carousel_item" src="./Frontend/stylesheet/media/ai.png" alt="">
+            <img class="carousel_item" src="./Frontend/stylesheet//media/1.gif" alt="">
+            <img class="carousel_item" src="./Frontend/stylesheet/media/2.gif" alt="">
+            <img class="carousel_item" src="./Frontend/stylesheet/media/3.gif" alt="">
+            <img class="carousel_item" src="./Frontend/stylesheet/media/4.gif" alt="">
+            <img class="carousel_item" src="./Frontend/stylesheet/media/5.gif" alt="">
+            <img class="carousel_item" src="./Frontend/stylesheet/media/6.gif" alt="">
+            <img class="carousel_item" src="./Frontend/stylesheet/media/1.gif" alt="">
+        </div>
+
+        <div id="carousel_btn">
+            <div class="btn prev">Prev</div>
+            <div class="btn next">Next</div>
+        </div>
+    </div> -->
+    <!-- Carousel effect css ends here -->
+    <!-- <h1 class="heading">Search Your Favourite Products</h1> -->
+    <!-- Search Box starts here -->
+    <!-- <div class="box" > -->
+    <!-- <input type="text" id="search_txt" style="background-attachment: black;" placeholder="Search Courses...."> -->
+    <!-- <a class="button" id="search_btn">Search</a> -->
+    <!-- </div> -->
+    <!-- SearchBox ends here -->
+
+    <div class="item_container" id="products"></div>
+
+    <script src="./Frontend/scripts/home.js" type="module"></script>
+  </body>
 </html>

@@ -1,4 +1,5 @@
 const orders = require("../models/orders");
+const cart= require("../models/cart");
 const axios = require("axios");
 require("dotenv").config();
 
@@ -11,7 +12,7 @@ module.exports.order_place = async (req, res) => {
     const order = await orders.create({
       user: req.user._id,
       products: req.body.items,
-      totalAmount: 15,
+      totalAmount: req.body.TotalPrice,
       shippingAddress: req.body.address,
       captureId: ""
     });
@@ -24,7 +25,7 @@ module.exports.order_place = async (req, res) => {
         {
           amount: {
             currency_code: "USD",
-            value: "15.00", // Replace with the actual order total
+            value: `${req.body.TotalPrice}` // Replace with the actual order total
           },
         },
       ],
@@ -45,7 +46,8 @@ module.exports.order_place = async (req, res) => {
     // Extract the PayPal Order ID from the response
     const paypalOrderId = response.data.id;
     // Return the PayPal Order ID to the frontend
-    return res.status(404).json({ orderId: paypalOrderId, orderDatabaseId: order._id });
+    console.log("OrderPlaced")
+    return res.status(200).json({ orderId: paypalOrderId, orderDatabaseId: order._id });
   } catch (error) {
     console.error("Error initiating payment:", error);
     // Handle any errors during the payment initiation process
@@ -54,7 +56,8 @@ module.exports.order_place = async (req, res) => {
 };
 module.exports.payment_verify = async (req, res) => {
   // Fetch the order id whose payment has to be verified
-  const paypalOrderId = req.body.orderId;
+  const paypalOrderId = req.body.orderId
+  const cart_payment = req.body.cartPayment
   const orderDatabaseId = req.params.orderDatabaseId
   try {
     // Generate access token
@@ -80,6 +83,14 @@ module.exports.payment_verify = async (req, res) => {
         const result = await orders.findOne({ _id: orderDatabaseId })
         result.paymentVerified = true
         result.status = "Inventory"
+        if(cart_payment)
+        {
+          const cart_data = await cart.findOne({userId:req.user._id})
+          cart_data.items = {}
+          cart_data.total =0
+          cart_data.markModified('items');
+          await cart_data.save()
+        }
         result.captureId = response.data.purchase_units[0].payments.captures[0].id
         await result.save()
         // Payment captured successfully
@@ -154,6 +165,7 @@ module.exports.cancel_order = async(req,res) => {
 }
 module.exports.get_all_order_details = async (req,res) =>{
   try{
+    console.log("Here")
     const userId = req.user._id
     const result = await orders.find({"user" : userId})
     res.status(200).json({message : "Details Fetched Successfully", orders : result})
