@@ -78,6 +78,7 @@ export async function signup_listner() {
     password: document.getElementById("signup_pass").value,
   };
   if (data.email == "" && data.name == "" && data.password == "") {
+    document.getElementById("signup_credentials_error").innerText =""
     document.getElementById("signup_email_error").innerText =
       "*Please Enter Email";
     document.getElementById("signup_name_error").innerText =
@@ -91,6 +92,7 @@ export async function signup_listner() {
     document.getElementById("signup_name_error").innerText =
       "*Please Enter Name";
     document.getElementById("signup_pass_error").innerText = "";
+    document.getElementById("signup_credentials_error").innerText =""
     return;
   } else if (data.email == "" && data.password == "") {
     document.getElementById("signup_email_error").innerText =
@@ -98,6 +100,7 @@ export async function signup_listner() {
     document.getElementById("signup_name_error").innerText = "";
     document.getElementById("signup_pass_error").innerText =
       "*Please Enter Password";
+      document.getElementById("signup_credentials_error").innerText =""
     return;
   } else if (data.password == "" && data.name == "") {
     document.getElementById("signup_email_error").innerText = "";
@@ -111,18 +114,21 @@ export async function signup_listner() {
     document.getElementById("signup_name_error").innerText = "";
     document.getElementById("signup_pass_error").innerText =
       "*Please Enter Password";
+      document.getElementById("signup_credentials_error").innerText =""
     return;
   } else if (data.name == "") {
     document.getElementById("signup_email_error").innerText = "";
     document.getElementById("signup_name_error").innerText =
       "*Please Enter Name";
     document.getElementById("signup_pass_error").innerText = "";
+    document.getElementById("signup_credentials_error").innerText =""
     return;
   } else if (data.email == "") {
     document.getElementById("signup_email_error").innerText =
       "*Please Enter Email";
     document.getElementById("signup_name_error").innerText = "";
     document.getElementById("signup_pass_error").innerText = "";
+    document.getElementById("signup_credentials_error").innerText =""
     return;
   } else {
     if (!ValidateEmail(data.email)) {
@@ -130,12 +136,17 @@ export async function signup_listner() {
         "*Not a Valid Email";
       document.getElementById("signup_pass_error").innerText = "";
       document.getElementById("signup_name_error").innerText = "";
+      document.getElementById("signup_credentials_error").innerText =""
       return;
     } else {
       document.getElementById("load2").style.display = "block";
       let res = await postData("/signup", data);
       document.getElementById("load2").style.display = "none";
+      document.getElementById("signup_pass_error").innerText = "";
+      document.getElementById("signup_name_error").innerText = "";
+      document.getElementById("signup_email_error").innerText = "";
       if (res.success == 0) {
+
         document.getElementById("signup_credentials_error").innerText =
           "*User Already Exists";
         return;
@@ -144,8 +155,12 @@ export async function signup_listner() {
           "*Some Error Occured, Check Your Credentials";
         return;
       } else if (res.success == 1) {
-        document.getElementById("m2").style.display = "none";
-        document.getElementById("m3").style.display = "block";
+        document.getElementById("signup_pass_error").innerText = "";
+        document.getElementById("signup_name_error").innerText = "";
+        document.getElementById("signup_email_error").innerText = "";
+        document.getElementById("signup_credentials_error").innerText =
+          "An email has been sent to your mail with verification mail, It will be valid for 10 min only";
+          document.getElementById("signup_credentials_error").style.color = "green"
       }
     }
   }
@@ -172,19 +187,6 @@ export async function resend_listner() {
     document.getElementById("otp_valid_error").innerText =
       "OTP Sent Successfully";
   }
-}
-
-// When user clicks on login page of signup btn
-export async function login_on_signup() {
-  document.getElementById("m2").style.display = "none";
-  document.getElementById("m1").style.display = "block";
-  // document.getElementById('id01').style.width = 'auto'
-}
-// When user clicks on signup btn of loginpage
-export async function signup_on_login() {
-  document.getElementById("m1").style.display = "none";
-  document.getElementById("m2").style.display = "block";
-  // document.getElementById('id02').style.width = 'auto'
 }
 
 // Function to validate active user session

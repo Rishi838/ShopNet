@@ -28,7 +28,7 @@ header {
 }
 
 .heading {
-  color: green;
+  color: #219890;
 }
 
 .title {
@@ -49,15 +49,15 @@ header {
   height: 60px;
   width: 300px;
   margin: 20px auto;
-  box-shadow: 10px 10px 30px rgb(254, 215, 188);
+  box-shadow: 10px 10px 30px #ccecea;
   border-radius: 50px;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.login,
-.signup {
+.login-slider,
+.signup-slider {
   font-size: 22px;
   border: none;
   outline: none;
@@ -72,8 +72,8 @@ header {
   border-radius: 50px;
   background-image: linear-gradient(
     to right,
-    rgb(255, 195, 110),
-    rgb(255, 146, 91)
+    #219890,
+    #219890
   );
   position: absolute;
   top: 20px;
@@ -111,15 +111,15 @@ header {
 }
 
 .login-box {
-  gap: 50px;
+  gap: 20px;
 }
 
 .signup-box {
-  gap: 30px;
+  gap: 15px;
 }
 
 .ele {
-  height: 60px;
+  height: 50px;
   width: 400px;
   outline: none;
   border: none;
@@ -136,8 +136,8 @@ header {
   border-radius: 50px;
   background-image: linear-gradient(
     to right,
-    rgb(255, 195, 110),
-    rgb(255, 146, 91)
+	#219890,
+    #219890
   );
   font-size: 22px;
   border: none;
@@ -162,8 +162,8 @@ header {
     margin: 20px auto;
   }
 
-  .login,
-  .signup {
+  .login-slider,
+  .signup-slider {
     font-size: 19px;
   }
 
@@ -225,8 +225,8 @@ header {
     margin: 20px auto;
   }
 
-  .login,
-  .signup {
+  .login-slider,
+  .signup-slider {
     font-size: 19px;
   }
 
@@ -267,3 +267,101 @@ header {
     font-size: 19px;
   }
 }
+.error{
+	color:red;
+	line-height: 1;
+	margin:0;
+}
+
+.loader {
+	display: none;
+	position: fixed;
+	/* padding-top: 100px; */
+	width: 40px;
+	right: 40vw;
+	top: 70vh;
+	/* margin: auto; */
+  }
+  
+  .loader .circle {
+	position: absolute;
+	width: 38px;
+	height: 38px;
+	opacity: 0;
+	transform: rotate(225deg);
+	animation-iteration-count: infinite;
+	animation-name: orbit;
+	animation-duration: 5.5s;
+  }
+  
+  .loader .circle:after {
+	content: '';
+	position: absolute;
+	width: 5px;
+	height: 5px;
+	border-radius: 5px;
+	background: #000000;
+  }
+  
+  .loader .circle:nth-child(2) {
+	animation-delay: 240ms;
+  }
+  
+  .loader .circle:nth-child(3) {
+	animation-delay: 480ms;
+  }
+  
+  .loader .circle:nth-child(4) {
+	animation-delay: 720ms;
+  }
+  
+  .loader .circle:nth-child(5) {
+	animation-delay: 960ms;
+  }
+  
+  @keyframes orbit {
+	0% {
+	  transform: rotate(225deg);
+	  opacity: 1;
+	  animation-timing-function: ease-out;
+	}
+  
+	7% {
+	  transform: rotate(345deg);
+	  animation-timing-function: linear;
+	}
+  
+	30% {
+	  transform: rotate(455deg);
+	  animation-timing-function: ease-in-out;
+	}
+  
+	39% {
+	  transform: rotate(690deg);
+	  animation-timing-function: linear;
+	}
+  
+	70% {
+	  transform: rotate(815deg);
+	  opacity: 1;
+	  animation-timing-function: ease-out;
+	}
+  
+	75% {
+	  transform: rotate(945deg);
+	  animation-timing-function: ease-out;
+	}
+  
+	76% {
+	  transform: rotate(945deg);
+	  opacity: 0;
+	}
+  
+	100% {
+	  transform: rotate(945deg);
+	  opacity: 0;
+	}
+  }
+  #load2{
+	top:74vh;
+  }
