@@ -1,12 +1,12 @@
 import { postData } from "../frontend_utils/fetch_api.js";
 async function validate_user() {
   const result = await postData("/validate", {});
-  if (result.validate == 0) {
-    document.querySelector("body").innerHTML =
-      "<h1>Please Authenticate Yourself before accessing your cart,Redirecting You to Login Page</h1>";
-    setTimeout(() => {
-      location.href = "/auth";
-    }, 3000);
+  if (result.validate == 1) {
+    document.getElementById("nav_auth").style.display = "none";
+    document.getElementById("nav_profile").style.display = "block";
+  } else {
+    document.getElementById("nav_auth").style.display = "block";
+    document.getElementById("nav_profile").style.display = "none";
   }
 }
 validate_user();
@@ -20,9 +20,8 @@ function change_listner(Currentkey, price) {
     });
     const new_total = new_quantity * price;
     document.getElementById(`${Currentkey}total`).innerText = `${new_total}`;
-    document.getElementById('basket-subtotal').innerHTML = `${result.TotalPrice}`
-    document.getElementById('basket-total').innerHTML = `${result.TotalPrice}`
-    document.getElementById('paypal-button-container').innerHTML = ""
+    document.getElementById('cart-subtotal').innerHTML = `${result.TotalPrice}`
+    document.getElementById('cart-total').innerHTML = `${result.TotalPrice}`
   };
 }
 function remove_listner(Currentkey) {
@@ -30,116 +29,59 @@ function remove_listner(Currentkey) {
     const result = await postData("/remove_from_cart", {
       productId: Currentkey,
     });
-    document.getElementById('basket-subtotal').innerHTML = `${result.TotalPrice}`
-    document.getElementById('basket-total').innerHTML = `${result.TotalPrice}`
-    document.getElementById('paypal-button-container').innerHTML = ""
+    document.getElementById('cart-subtotal').innerHTML = `${result.TotalPrice}`
+    document.getElementById('cart-total').innerHTML = `${result.TotalPrice}`
     fetch_cart();
   };
 }
 async function fetch_cart() {
-  const cart_data = await postData("/fetch_cart", {});
-  const success = cart_data.success;
-  if (success == 0 || Object.keys(cart_data.cart).length == 0) {
+  const response= await fetch(`/fetch_cart`)
+  const result = await response.json()
+  const cart_data = result.cart
+  const cart_items = cart_data.items
+  const success = result.success;
+  if (success == 0 || cart_data.total==0) {
     document.getElementById("cart-items").innerHTML =
       "This user has no elements in his cart";
   } else if (success == 1) {
-    const cart_items = cart_data.cart;
-    document.getElementById('basket-subtotal').innerHTML = `${cart_data.TotalPrice}`
-    document.getElementById('basket-total').innerHTML = `${cart_data.TotalPrice}`
+    document.getElementById('cart-subtotal').innerHTML = `$${cart_data.total}`
+    document.getElementById('cart-total').innerHTML = `$${cart_data.total}`
     document.getElementById("cart-items").innerHTML = "";
+    
     for (let key in cart_items) {
       const quantity = cart_items[key];
-      const result = await postData("/get_product_details", {
-        productId: key,
-      });
-      const details = result.details;
-      const subtotal = quantity * details.Price;
+      const response= await fetch(`/products/${key}`)
+      const product = await response.json()
+      const result = product.product
+      const subtotal = quantity * result.Price;
       document.getElementById("cart-items").innerHTML += `
-      <div class="basket-product">
-        <div class="item">
-          <div class="product-image">
-            <img src="http://placehold.it/120x166" alt="Placholder Image 2" class="product-frame">
-          </div>
-          <div class="product-details">
-            <h1 style="font-weight:bold"> ${details.Name}</h1>
-            <p><strong>${details.Description}</strong></p>
-            <p>Product Code - ${details._id}</p>
-          </div>
-        </div>
-        <div class="price">${details.Price}</div>
-        <div class="quantity">
-          <input type="number" id = "${key}quantity"value="${quantity}" min="1" class="quantity-field">
-        </div>
-        <div class="subtotal" id = "${key}total">${subtotal} </div>
-        <div class="remove">
-          <button id = "${key}remove">Remove</button>
-        </div>
-      </div>
+      <tr>
+      <td><a href="#"><i class="fa fa-times-circle" id="${key}remove" aria-hidden="true" style="color: black;"></i>
+      </a></td>
+      <td><img src="${result.Image[0]}" alt=""></td>
+      <td >${result.Name}</td>
+      <td>$${result.Price}</td>
+      <td><input type="number" id="${key}quantity" value="${quantity}"></td>
+      <td id="${key}total">${subtotal}</td>
+      </tr>
       `;
     }
     // Doing it to resolve closure related issues(otherwise only last event listner is executed)
     for (let key in cart_items) {
-      const result = await postData("/get_product_details", {
-        productId: key,
-      });
-      const details = result.details;
+      const response= await fetch(`/products/${key}`)
+      const product = await response.json()
+      const result = product.product
       if (cart_items.hasOwnProperty(key)) {
         const element1 = document.getElementById(`${key}quantity`);
-        element1.addEventListener("change", change_listner(key, details.Price));
+        element1.addEventListener("change", change_listner(key, result.Price));
         const element2 = document.getElementById(`${key}remove`);
         element2.addEventListener("click", remove_listner(key));
       }
     }
+    document.getElementById('checkout').addEventListener('click',async()=>{
+      location.href = `/checkout?source=cart`
+   })
   }
 }
 
-fetch_cart();
-
-function order_ready (cart){
-  let arr =[]
-  for(const key in cart) {
-    arr.push({
-      product : key,
-      quantity : cart[key]
-    })
-  }
-  return arr
-}
-document.getElementById('payment').addEventListener('click',async()=>{
-  const Cart= await postData('/fetch_cart')
-  const order_place = await postData('/payments/initiate',{
-    "items" : order_ready(Cart.cart),
-    "TotalPrice" : Cart.TotalPrice,
-    "address" : "16 M.C Colony"
-  })
-  const orderDatabaseId = order_place.orderDatabaseId;
-  const paypalOrderId = order_place.orderId;
-  console.log(orderDatabaseId,paypalOrderId)
-  paypal
-        .Buttons({
-          createOrder: function () {
-            return paypalOrderId;
-          },
-          onApprove: async function (data) {
-              // Make the API request to verify the payment
-            const result = await postData(`/payments/${orderDatabaseId}/verify` , {
-              orderId: paypalOrderId,
-              cartPayment: true
-            })
-                if (result.success) {
-                  document.getElementById('payment_status').style.color = "rgb(67, 160, 57)"
-                  document.getElementById('payment_status').innerText =`Payment Verified Successfully, Redirecting You to Orders Page
-                  `
-                  setTimeout(()=>{
-                    location.href='/orders'
-                  },3000)
-  
-                } else {
-                  document.getElementById('payment_status').style.color = "rgb(151, 37, 37)"
-                  document.getElementById('payment_status').innerText =`Some Error Occured While verifying payment, Try Again`
-                }
-              
-          },
-        })
-        .render("#paypal-button-container");
-})
+fetch_cart()

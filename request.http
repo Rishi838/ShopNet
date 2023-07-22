@@ -18,12 +18,13 @@ POST http://localhost:3000/add_to_cart
 Content-Type: application/json
 
 {
-    "items" :[
-    {
-        "productId" : "64b1456f275fdcbdbfb154c4",
-        "quantity" : 2
-    }
-    ]
+   "items" : [
+      {
+         "productId" :"64b83ef941dc9a00197ca636",
+         "quantity": 4
+      }
+   ]
 }
 
 #  GET http://localhost:3000/verify?email=rdrishi97@gmail.com&token=148555
+

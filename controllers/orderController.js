@@ -1,4 +1,5 @@
 const orders = require("../models/orders");
+const product = require("../models/product")
 const cart= require("../models/cart");
 const axios = require("axios");
 require("dotenv").config();
@@ -9,10 +10,18 @@ const clientSecret = process.env.PAYPAL_SECRET;
 module.exports.order_place = async (req, res) => {
   try {
     // Initialising an order item with default payment status as unverified
+    if(req.body.items==null || req.body.address==null)
+    return res.status(404).json({success:0,message:"Provide All information correctly"})
+    const order_sum = await computeTotal(req.body.items)
+    console.log(req.body.items,order_sum)
+    if(order_sum==-1)
+     return res.status(404).json({success:0, message: "An invalid product is sent, so order can't be placed"})
+     if(order_sum==0)
+     return res.status(404).json({success:0, message: "Please add something to purchase"})
     const order = await orders.create({
       user: req.user._id,
       products: req.body.items,
-      totalAmount: req.body.TotalPrice,
+      totalAmount: order_sum,
       shippingAddress: req.body.address,
       captureId: ""
     });
@@ -25,7 +34,7 @@ module.exports.order_place = async (req, res) => {
         {
           amount: {
             currency_code: "USD",
-            value: `${req.body.TotalPrice}` // Replace with the actual order total
+            value: `${order_sum}` // Replace with the actual order total
           },
         },
       ],
@@ -42,16 +51,14 @@ module.exports.order_place = async (req, res) => {
         },
       }
     );
-
     // Extract the PayPal Order ID from the response
     const paypalOrderId = response.data.id;
     // Return the PayPal Order ID to the frontend
-    console.log("OrderPlaced")
-    return res.status(200).json({ orderId: paypalOrderId, orderDatabaseId: order._id });
+    return res.status(200).json({ success: 1,orderId: paypalOrderId, orderDatabaseId: order._id });
   } catch (error) {
     console.error("Error initiating payment:", error);
     // Handle any errors during the payment initiation process
-    return res.status(500).json({ error: "Payment initiation error" });
+    return res.status(500).json({ success: -1,error: "Payment initiation error" });
   }
 };
 module.exports.payment_verify = async (req, res) => {
@@ -216,4 +223,17 @@ async function generateAccessToken() {
   );
   // Return the access token returned by the api
   return response.data.access_token;
+}
+
+async function computeTotal(items){
+  let sum=0
+  for(let i=0;i<items.length;i++)
+  { 
+    const result = await product.findOne({_id : items[i].product})
+    if(!result)
+    return -1;
+    else
+    sum += (result.Price * items[i].quantity)
+  }
+  return sum
 }

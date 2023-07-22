@@ -37,11 +37,15 @@ app.get('/cart',(req,res)=>{
 app.get('/orders',(req,res)=>{
   res.render('orders')
 })
+app.get('/checkout',(req,res)=>{
+  res.render('checkout')
+})
+app.get('/product/webpage/:productId',(req,res)=>{
+  res.render('product',{productId: req.params.productId})
+})
 
 // Using auth routes in our server files which take access from routes folder
 app.use(authRoutes)
-// Exposing protected End points
-app.use(protectedRoutes)
 // Exposing end points to add product in the product database,this can only be used the people with admin perms
 app.use(addproduct)
 // Exposing cart API

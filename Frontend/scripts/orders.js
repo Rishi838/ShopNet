@@ -13,19 +13,19 @@ validate_user();
 
 function func(id, products) {
   return async function () {
+    if(document.getElementById(`${id}order_details`).innerHTML != "")
+    {
+      document.getElementById(`${id}order_details`).innerHTML = ""
+      return;
+    }
     for (let i = 0; i < products.length; i++) {
       const product_details = await postData("/get_product_details", {
         productId: products[i].product,
-      });
-      if (document.getElementById(`${id}order_details`).innerHTML == "") {
-        document.getElementById(`${id}order_details`).innerHTML = `
+      });  
+        document.getElementById(`${id}order_details`).innerHTML += `
       <div class="product_details">
       ${product_details.details.Name}: ${products[i].quantity}
     </div>`;
-      }
-      else{
-        document.getElementById(`${id}order_details`).innerHTML = ""
-      }
     }
   };
 }

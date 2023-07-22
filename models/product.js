@@ -20,14 +20,26 @@ const productschema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  Description: {
-    type: String,
-    required: true,
-  },
   Category : {
     type : String,
     required :true
   },
+  Image : [{
+    type: String,
+    required : true
+  }],
+  Trending:{
+    type: Boolean,
+    default: false
+  },
+  Attributes:{
+    type: Map,
+    of: String
+  },
+  Rating:{
+    type:Number,
+    default:1
+  }
 });
 const collection = new mongoose.model("Products", productschema);
 module.exports = collection;

@@ -3,21 +3,23 @@ const Product = require('../models/product')
 
 module.exports.addtocart = async (req, res) => {
   try {
-    // Fetching user details after it being passed through the middlare
+    // Fetching user details after it being passed through the middlare 
     const userId = req.user._id
+    console.log(userId)
     const itemsArray = req.body.items
     let cart = await Cart.findOne({ userId });
     if (!cart) {
       // Create a new cart if it doesn't exist
       cart = new Cart({ userId, items: {} });
     }
-    
+  
     // Update the cart items
     let { items} = cart;
     for (const item of itemsArray) {
       const { productId, quantity } = item;
      
       const product = await Product.findOne({_id:productId})
+  
       cart.total += quantity * product.Price
       if (items.hasOwnProperty(productId)) {
         items[productId] += quantity;
@@ -25,10 +27,10 @@ module.exports.addtocart = async (req, res) => {
         items[productId] = quantity;
       }
     }
-   
+    
    cart.markModified('items');
     await cart.save();
-    return res.status(200).json({message:"Items Added Successfully",Current_Cart : cart.items , TotalPrice: cart.total})
+    return res.status(200).json({message:"Items Added Successfully",cart : cart})
     
   } catch (err) {
     console.log("Error Occured ", err);
@@ -54,8 +56,7 @@ module.exports.fetchcart = async (req, res) => {
         .json({
           success:1,
           message: "Cart Items Fetched successfully",
-          cart: result.items,
-          TotalPrice : result.total
+          cart:result
         });
     }
   } catch (err) {

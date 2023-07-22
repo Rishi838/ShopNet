@@ -1,392 +1,269 @@
-html {
-	font-size: 100%;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	scroll-behavior: smooth
-  }
-  
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-  body {
-	font-family: inter, Tahoma, Geneva, Verdana, sans-serif;
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: 1.5;
-	overflow-x: hidden;
-	color: white;
-	background-color: #121212;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 
-  a,
-button {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  cursor: pointer;
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  background-color: rgb(231, 231, 231);
+}
+
+header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.heading {
+  color: green;
+}
+
+.title {
+  font-weight: 400;
+  letter-spacing: 1.5px;
+}
+
+.container {
+  height: 600px;
+  width: 500px;
+  background-color: white;
+  box-shadow: 8px 8px 20px rgb(128, 128, 128);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn {
+  height: 60px;
+  width: 300px;
+  margin: 20px auto;
+  box-shadow: 10px 10px 30px rgb(254, 215, 188);
+  border-radius: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.login,
+.signup {
+  font-size: 22px;
   border: none;
   outline: none;
-  background: 0 0;
-  text-decoration: none
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
 }
-.modal-content {
-	background-color: transparent;
-	margin: 5% auto 5% auto;
-	/* 15% from the top and centered */
-	border-radius: 15px;
-	width: 29rem;
+
+.slider {
+  height: 60px;
+  width: 150px;
+  border-radius: 50px;
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 195, 110),
+    rgb(255, 146, 91)
+  );
+  position: absolute;
+  top: 20px;
+  left: 100px;
+  transition: all 0.5s ease-in-out;
 }
-.modal {
-	display: none;
-	/* Hidden by default */
-	position: fixed;
-	/* Stay in place */
-	z-index: 5;
-	/* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%;
-	/* Full width */
-	height: 100%;
-	/* Full height */
-	overflow: hidden;
-	/* Enable scroll if needed */
-  
-	/* Black w/ opacity */
+
+.moveslider {
+  left: 250px;
+}
+
+.form-section {
+  height: 500px;
+  width: 1000px;
+  padding: 20px 0;
+  display: flex;
+  position: relative;
+  transition: all 0.5s ease-in-out;
+  left: 0px;
+}
+
+.form-section-move {
+  left: -500px;
+}
+
+.login-box,
+.signup-box {
+  height: 100%;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 40px;
+}
+
+.login-box {
+  gap: 50px;
+}
+
+.signup-box {
+  gap: 30px;
+}
+
+.ele {
+  height: 60px;
+  width: 400px;
+  outline: none;
+  border: none;
+  color: rgb(77, 77, 77);
+  background-color: rgb(240, 240, 240);
+  border-radius: 50px;
+  padding-left: 30px;
+  font-size: 18px;
+}
+
+.clkbtn {
+  height: 60px;
+  width: 150px;
+  border-radius: 50px;
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 195, 110),
+    rgb(255, 146, 91)
+  );
+  font-size: 22px;
+  border: none;
+  cursor: pointer;
+}
+
+/* For Responsiveness of the page */
+
+@media screen and (max-width: 650px) {
+  .container {
+    height: 600px;
+    width: 300px;
   }
-  #m1{
-	display: block;
+
+  .title {
+    font-size: 15px;
   }
- 
-  
-  /* Add Zoom Animation */
-  .animate {
-	-webkit-animation: animatezoom 0.6s;
-	animation: animatezoom 0.6s
+
+  .btn {
+    height: 50px;
+    width: 200px;
+    margin: 20px auto;
   }
-  
-  @-webkit-keyframes animatezoom {
-	from {
-	  -webkit-transform: scale(0)
-	}
-  
-	to {
-	  -webkit-transform: scale(1)
-	}
+
+  .login,
+  .signup {
+    font-size: 19px;
   }
-  
-  @keyframes animatezoom {
-	from {
-	  transform: scale(0)
-	}
-  
-	to {
-	  transform: scale(1)
-	}
+
+  .slider {
+    height: 50px;
+    width: 100px;
+    left: 50px;
   }
-  
-  /* Add Zoom Animation */
-  .animate {
-	-webkit-animation: animatezoom 0.6s;
-	animation: animatezoom 0.6s
+
+  .moveslider {
+    left: 150px;
   }
-  
-  @-webkit-keyframes animatezoom {
-	from {
-	  -webkit-transform: scale(0)
-	}
-  
-	to {
-	  -webkit-transform: scale(1)
-	}
+
+  .form-section {
+    height: 500px;
+    width: 600px;
   }
-  
-  @keyframes animatezoom {
-	from {
-	  transform: scale(0)
-	}
-  
-	to {
-	  transform: scale(1)
-	}
+
+  .form-section-move {
+    left: -300px;
   }
-  
-  section {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 80vh;
-	background: transparent;
+
+  .login-box,
+  .signup-box {
+    height: 100%;
+    width: 300px;
   }
-  
-  section .color {
-	position: absolute;
-	filter: blur(150px);
+
+  .ele {
+    height: 50px;
+    width: 250px;
+    font-size: 15px;
   }
-  
-  section .color:nth-child(1) {
-	top: -350px;
-	width: 600px;
-	height: 600px;
-	background: transparent;
+
+  .clkbtn {
+    height: 50px;
+    width: 130px;
+    font-size: 19px;
   }
-  
-  section .color:nth-child(2) {
-	bottom: -150px;
-	left: 100px;
-	width: 500px;
-	height: 500px;
-	background: transparent;
+}
+
+@media screen and (max-width: 320px) {
+  .container {
+    height: 600px;
+    width: 250px;
   }
-  
-  section .color:nth-child(3) {
-	bottom: 50px;
-	right: 100px;
-	width: 300px;
-	height: 300px;
-	background: transparent;
+
+  .heading {
+    font-size: 30px;
   }
-  
-  .box {
-	position: relative;
+
+  .title {
+    font-size: 10px;
   }
-  
-  .box .square {
-	position: absolute;
-	backdrop-filter: blur(5px);
-	box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-	border: 1px solid rgba(255, 255, 255, 0.5);
-	border-right: 1px solid rgba(255, 255, 255, 0.2);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-	background: rgba(255, 255, 255, 0.1);
-	border-radius: 10px;
-	animation: animate 10s linear infinite;
-	animation-delay: calc(-1s * var(--i));
+
+  .btn {
+    height: 50px;
+    width: 200px;
+    margin: 20px auto;
   }
-  
-  @keyframes animate {
-	0% {
-	  transform: translateY(-40px);
-	}
-  
-	50% {
-	  transform: translateY(40px);
-	}
+
+  .login,
+  .signup {
+    font-size: 19px;
   }
-  
-  .box .square:nth-child(1) {
-	top: -50px;
-	right: -60px;
-	width: 100px;
-	height: 100px;
+
+  .slider {
+    height: 50px;
+    width: 100px;
+    left: 27px;
   }
-  
-  .box .square:nth-child(2) {
-	top: 150px;
-	left: -100px;
-	width: 120px;
-	height: 120px;
-	z-index: 2;
+
+  .moveslider {
+    left: 127px;
   }
-  
-  .box .square:nth-child(3) {
-	bottom: 50px;
-	right: -60px;
-	width: 80px;
-	height: 80px;
-	z-index: 2;
+
+  .form-section {
+    height: 500px;
+    width: 500px;
   }
-  
-  .box .square:nth-child(4) {
-	bottom: -80px;
-	left: 100px;
-	width: 50px;
-	height: 50px;
+
+  .form-section-move {
+    left: -250px;
   }
-  
-  .box .square:nth-child(5) {
-	top: -80px;
-	left: 140px;
-	width: 60px;
-	height: 60px;
+
+  .login-box,
+  .signup-box {
+    height: 100%;
+    width: 250px;
   }
-  
-  .container1 {
-	position: relative;
-	width: 400px;
-	min-height: 400px;
-	background: rgba(255, 255, 255, 0.1);
-	border-radius: 10px;
-	display: flex;
-	justify-content: center;
-	backdrop-filter: blur(5px);
-	box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-	border: 1px solid rgba(255, 255, 255, 0.5);
-	border-right: 1px solid rgba(255, 255, 255, 0.2);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+  .ele {
+    height: 50px;
+    width: 220px;
+    font-size: 15px;
   }
-  
-  .form {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	padding: 40px;
+
+  .clkbtn {
+    height: 50px;
+    width: 130px;
+    font-size: 19px;
   }
-  
-  .form h2 {
-	position: relative;
-	color: #fff;
-	font-size: 600;
-	letter-spacing: 1px;
-	margin-bottom: -40px;
-  }
-  
-  .form h2::before {
-	content: '';
-	position: absolute;
-	left: 0;
-	bottom: -10px;
-	width: 80px;
-	height: 4px;
-	background: #fff;
-  }
-  
-  .form .inputBox {
-	width: 100%;
-	margin-top: 20px;
-  }
-  
-  .form .inputBox input {
-	width: 120%;
-	background: rgba(255, 255, 255, 0.2);
-	border: none;
-	outline: none;
-	padding: 10px 20px;
-	border-radius: 35px;
-	border: 1px solid rgba(255, 255, 255, 0.5);
-	border-right: 1px solid rgba(255, 255, 255, 0.2);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-	font-size: 16px;
-	letter-spacing: 1px;
-	color: #fff;
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  }
-  
-  .form .inputBox input::placeholder {
-	color: #fff;
-  }
-  
-  .form .inputBox .popup_btn {
-	background: #fff;
-	color: #666;
-	max-width: 100px;
-	cursor: pointer;
-	margin-bottom: 20px;
-	font-weight: 600;
-  }
-  
-  .forget {
-	margin-top: 5px;
-	color: #fff;
-  }
-  
-  .forget a {
-	color: #fff;
-	font-weight: 600;
-  }
-  
-  .error {
-	text-align: right;
-	text-decoration: italic;
-	padding-top: 6px;
-	color: rgb(243, 55, 55);
-	font-size: 12px;
-  }
-  
-  .loader {
-	display: none;
-	position: fixed;
-	/* padding-top: 100px; */
-	width: 40px;
-	left: 80%;
-	top: 45%;
-	/* margin: auto; */
-  }
-  
-  .loader .circle {
-	position: absolute;
-	width: 38px;
-	height: 38px;
-	opacity: 0;
-	transform: rotate(225deg);
-	animation-iteration-count: infinite;
-	animation-name: orbit;
-	animation-duration: 5.5s;
-  }
-  
-  .loader .circle:after {
-	content: '';
-	position: absolute;
-	width: 5px;
-	height: 5px;
-	border-radius: 5px;
-	background: #fff;
-  }
-  
-  .loader .circle:nth-child(2) {
-	animation-delay: 240ms;
-  }
-  
-  .loader .circle:nth-child(3) {
-	animation-delay: 480ms;
-  }
-  
-  .loader .circle:nth-child(4) {
-	animation-delay: 720ms;
-  }
-  
-  .loader .circle:nth-child(5) {
-	animation-delay: 960ms;
-  }
-  
-  @keyframes orbit {
-	0% {
-	  transform: rotate(225deg);
-	  opacity: 1;
-	  animation-timing-function: ease-out;
-	}
-  
-	7% {
-	  transform: rotate(345deg);
-	  animation-timing-function: linear;
-	}
-  
-	30% {
-	  transform: rotate(455deg);
-	  animation-timing-function: ease-in-out;
-	}
-  
-	39% {
-	  transform: rotate(690deg);
-	  animation-timing-function: linear;
-	}
-  
-	70% {
-	  transform: rotate(815deg);
-	  opacity: 1;
-	  animation-timing-function: ease-out;
-	}
-  
-	75% {
-	  transform: rotate(945deg);
-	  animation-timing-function: ease-out;
-	}
-  
-	76% {
-	  transform: rotate(945deg);
-	  opacity: 0;
-	}
-  
-	100% {
-	  transform: rotate(945deg);
-	  opacity: 0;
-	}
-  }
+}
