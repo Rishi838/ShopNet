@@ -43,6 +43,9 @@ app.get('/checkout',(req,res)=>{
 app.get('/product/webpage/:productId',(req,res)=>{
   res.render('product',{productId: req.params.productId})
 })
+app.get('/verify',(req,res)=>{
+  res.render("verify")
+})
 
 // Using auth routes in our server files which take access from routes folder
 app.use(authRoutes)

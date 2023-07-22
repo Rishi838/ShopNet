@@ -165,7 +165,7 @@ module.exports.verify = async (req, res) => {
       httpOnly: true,
       sameSite: "lax",
     });
-    return res.render('verify_login')
+    return res.render('verify')
   } catch (error) {
     console.log(error);
     return res
