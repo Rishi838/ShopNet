@@ -14,17 +14,30 @@
   
 # }
 
-POST http://localhost:3000/add_to_cart
-Content-Type: application/json
+# POST http://localhost:3000/add_product
+# Content-Type: application/json
 
-{
-   "items" : [
-      {
-         "productId" :"64b83ef941dc9a00197ca636",
-         "quantity": 4
-      }
-   ]
-}
+# {
+#    "name" : "BATA Mens Boss-ace Uniform Dress Shoe" ,
+#    "price" :15,
+#    "category" : "Sports Shoes",
+#    "image" : [
+#     "/utilities/product_image/MensSneakers/9.jpg",
+#     "/utilities/product_image/MensSneaker/10.jpg",
+#     "/utilities/product_image/MensSneaker/11.jpg",
+#     "/utilities/product_image/MensSneaker/12.jpg"
+#    ],
+#    "trending" : true,
+#    "attributes" : {
+#     "Color": "Black",
+#     "Brand" : "Bata",
+#     "Size" : 10,
+#     "Width" : "Normal"
+#    },
+#    "reviews": []
+# }
+
+GET http://localhost:3000/products?page=5&products=9
 
 #  GET http://localhost:3000/verify?email=rdrishi97@gmail.com&token=148555
 

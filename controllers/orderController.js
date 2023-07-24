@@ -1,5 +1,6 @@
 const orders = require("../models/orders");
 const product = require("../models/product")
+const users = require("../models/user")
 const cart= require("../models/cart");
 const axios = require("axios");
 require("dotenv").config();
@@ -127,7 +128,7 @@ module.exports.get_single_order_details = async (req, res) => {
     if (!result)
       return res.status(400).json({ message:"No Order with the given id is asociated with this user"})
     else {
-      return res.status(200).json({ "Products": result.products, "Ammount": result.totalAmount,status : result.status, "Address": result.shippingAddress, "Order Date": result.createdAt })
+      return res.status(200).json({order :result })
     }
   } catch (err) {
     console.log(err)
@@ -172,7 +173,6 @@ module.exports.cancel_order = async(req,res) => {
 }
 module.exports.get_all_order_details = async (req,res) =>{
   try{
-    console.log("Here")
     const userId = req.user._id
     const result = await orders.find({"user" : userId})
     res.status(200).json({message : "Details Fetched Successfully", orders : result})
@@ -204,6 +204,15 @@ module.exports.change_status = async(req,res) =>{
     console.log(err)
     res.status(400).json({ message: "Server Error" })
   }
+}
+module.exports.get_receipt = async(req,res)=>{
+  const orderId = req.params.id
+  const order = await orders.findOne({_id:orderId})
+  let products=[]
+  for(let i=0;i<order.products.length;i++)
+    products.push(await product.findOne({_id: order.products[i].product}))
+  const user = await users.findOne({_id:order.user})
+  return res.render("receipt",{order,products,user})
 }
 // Function to generate access token for our merchant id
 async function generateAccessToken() {

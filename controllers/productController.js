@@ -9,7 +9,8 @@ const product = require("../models/product");
       Category: req.body.category,
       Image : req.body.image,
       Trending: req.body.trending,
-      Attributes: req.body.attributes
+      Attributes: req.body.attributes,
+      Reviews: req.body.reviews
       
     });
     resp.status(200).json({message : "Product added successfully",result})

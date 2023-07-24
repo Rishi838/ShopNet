@@ -1100,6 +1100,10 @@ border-radius: 20px;
 
  /* Cart Page */
 
+ #cart{
+  padding-left: 0%;
+  margin-bottom: 50px;
+ }
  #cart table{
   width: 100%;
   border-collapse: collapse;
@@ -1122,6 +1126,7 @@ border-radius: 20px;
  }
  
  #cart table td:nth-child(n){
+  margin-top: 5px;
   width: 250px;
   text-align: center;
   white-space: pre-wrap;
@@ -1154,10 +1159,11 @@ border-radius: 20px;
  }
 
  #cart table tbody tr td{
-  padding-top: 15px;
+  padding-top: 45px;
  }
 
  #cart table tbody td{
+
  font-size: 13px;
  }
 
@@ -1242,7 +1248,7 @@ border-radius: 20px;
  .container {
   position: fixed;
   top: 100px;
-  right: 20px;
+  right: 10px;
 }
 
 .alert_notification {
