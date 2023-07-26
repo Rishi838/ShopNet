@@ -5,7 +5,6 @@ require('dotenv').config();
 
 // Importing all utilities that need to be use
 const authRoutes = require('./routes/authRoutes')
-const protectedRoutes = require('./routes/cartRoutes')
 const addproduct = require('./routes/productRoutes')
 const cartRoutes = require('./routes/cartRoutes')
 const orderRoutes = require('./routes/orderRoutes')
