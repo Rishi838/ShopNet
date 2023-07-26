@@ -5,7 +5,9 @@
   box-sizing: border-box;
   font-family: "Spartan", sans-serif;
 }
-
+::-webkit-scrollbar {
+  display: none;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -39,7 +41,11 @@ p {
   color: #465b52;
   margin: 15px 0 20px 0;
 }
-
+.logo{
+  width: 140px;
+  mix-blend-mode: multiply;
+  transform: scale(1.2);
+}
 .section-p1 {
   padding: 40px 80px;
 }
@@ -83,7 +89,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 80px;
+  padding: 0px 80px;
   background: #E3E6F3;
   box-shadow: 0 5px 15px rgb(0, 0, 0, 0.06);
   z-index: 999;

@@ -1,6 +1,18 @@
 import { postData } from "../frontend_utils/fetch_api.js";
 const radioContainer = document.getElementById('radio-container');
 
+async function validate_user() {
+  const result = await postData("/validate", {});
+  if (result.validate == 1) {
+    document.getElementById("nav_auth").style.display = "none";
+    document.getElementById("nav_profile").style.display = "block";
+  } else {
+    document.getElementById("nav_auth").style.display = "block";
+    document.getElementById("nav_profile").style.display = "none";
+  }
+}
+validate_user();
+
 // Add event listener to the container element
 radioContainer.addEventListener('change', handleGenderChange);
 

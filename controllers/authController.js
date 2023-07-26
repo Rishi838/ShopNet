@@ -140,6 +140,7 @@ module.exports.verify = async (req, res) => {
       return res
         .status(400)
         .json({ message: "Token Expired or not a valid token" });
+      
     // Here the token is verified , so check EmailVerified as True and erase the verification token that is generated
     user.EmailToken = null;
     user.IsEmailVerified = true;
@@ -165,7 +166,7 @@ module.exports.verify = async (req, res) => {
       httpOnly: true,
       sameSite: "lax",
     });
-    return res.render('verify')
+    return res.render('email_verify')
   } catch (error) {
     console.log(error);
     return res

@@ -43,9 +43,6 @@ app.get('/checkout',(req,res)=>{
 app.get('/product/webpage/:productId',(req,res)=>{
   res.render('product',{productId: req.params.productId})
 })
-app.get('/verify',(req,res)=>{
-  res.render("verify")
-})
 app.get('/shop',(req,res)=>{
   res.render("shop")
 })
