@@ -4,7 +4,7 @@ const path = require('path')
 require('dotenv').config();
 
 // Importing all utilities that need to be use
-const authRoutes = require('https://shopnet-lx45.onrender.com/routes/authRoutes')
+const authRoutes = require('./routes/authRoutes')
 const addproduct = require('./routes/productRoutes')
 const cartRoutes = require('./routes/cartRoutes')
 const orderRoutes = require('./routes/orderRoutes')
