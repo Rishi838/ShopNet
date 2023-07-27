@@ -67,7 +67,7 @@ button.normal {
   border: none;
   outline: none;
   transition: 0.2s;
-  margin-top: 4px;
+  margin-top: 5px;
 }
 
 button.white {
@@ -1109,7 +1109,178 @@ border-radius: 20px;
 
  /* Cart Page */
 
- .cart-container {
+ #cart{
+  padding-left: 0%;
+  margin-bottom: 50px;
+ }
+ #cart table{
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  white-space: nowrap;
+ }
+
+ #cart table img{
+  width: 70px;
+ }
+
+ #cart table td:nth-child(1){
+  width: 100px;
+  text-align: center;
+ }
+ 
+ #cart table td:nth-child(2){
+  width: 150px;
+  text-align: center;
+ }
+ 
+ #cart table td:nth-child(n){
+  margin-top: 5px;
+  width: 250px;
+  text-align: center;
+  white-space: pre-wrap;
+ }
+ 
+ #cart table td:nth-child(4),
+ #cart table td:nth-child(5),
+ #cart table td:nth-child(6){
+  width: 150px;
+  text-align: center;
+  white-space: pre-wrap;
+ }
+
+ #cart table td:nth-child(5) input{
+  width: 70px;
+  padding: 10px 5px 10px 15px;
+ }
+
+ #cart table thead{
+  border: 1px solid #e2e9e1;
+  border-left: none;
+  border-right: none;
+ }
+ 
+ #cart table thead td{
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  padding: 18px 0;
+ }
+
+ #cart table tbody tr td{
+  padding-top: 45px;
+ }
+
+ #cart table tbody td{
+
+ font-size: 13px;
+ }
+
+ #cart-add {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+ }
+
+ #coupon{
+  width: 50%;
+  margin-bottom: 30px;
+ }
+
+ #coupon h3{
+  padding-bottom: 15px;
+ }
+
+ #coupon input{
+  padding: 10px 20px;
+  outline: none;
+  width: 60%;
+  margin-right: 10px;
+  border: 1px solid #e2e9e1 ;
+ }
+
+ #coupon button,
+ #subtotal button{
+  background-color: #088178;
+  color: #fff;
+  padding: 12px 20px;
+ }
+
+ #subtotal {
+  width: 50%;
+  margin-bottom: 30px;
+  border: 1px solid #e2e9e1;
+  padding: 30px;
+ }
+ 
+ #subtotal table{
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+ }
+
+ #subtotal table td{
+  width: 50%;
+  border: 1px solid #e2e9e1;
+  padding: 10px;
+  font-size: 13px;
+ }
+
+ #cart-add{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+ }
+
+ #coupon {
+  width: 50%;
+  margin-bottom: 30px;
+ }
+
+ #coupon h3,
+ #subtotal h3{
+ padding-bottom: 15px;
+ }
+
+ #coupon input {
+  padding: 10px 20px;
+  outline: none;
+  width: 60%;
+  margin-right: 10px;
+  border: 1px solid #e2e9e1;
+ }
+
+ .product_details{
+  margin: 7px;
+ }
+
+ .container {
+  position: fixed;
+  top: 100px;
+  right: 10px;
+}
+
+.alert_notification {
+  background-color: #e41749;
+  border: 2px solid #e99e9e;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color:white;
+}
+.success_notification {
+  background-color: #12c99b;
+  border: 2px solid #bfefb3;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color:white;
+}
+.styled-input:focus {
+  border-color: #007bff; /* Change border color on focus */
+}
+
+.cart-container {
   margin: 5% 3%;
 }
 @media (min-width: 48em) {
@@ -1278,102 +1449,3 @@ border-radius: 20px;
     content: none;
  }
 }
-
- #coupon{
-  width: 50%;
-  margin-bottom: 30px;
- }
-
- #coupon h3{
-  padding-bottom: 15px;
- }
-
- #coupon input{
-  padding: 10px 20px;
-  outline: none;
-  width: 60%;
-  margin-right: 10px;
-  border: 1px solid #e2e9e1 ;
- }
-
- #coupon button,
- #subtotal button{
-  background-color: #088178;
-  color: #fff;
-  padding: 12px 20px;
- }
-
- #subtotal {
-  width: 50%;
-  margin-bottom: 30px;
-  border: 1px solid #e2e9e1;
-  padding: 30px;
- }
- 
- #subtotal table{
-  border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 20px;
- }
-
- #subtotal table td{
-  width: 50%;
-  border: 1px solid #e2e9e1;
-  padding: 10px;
-  font-size: 13px;
- }
-
- #cart-add{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
- }
-
- #coupon {
-  width: 50%;
-  margin-bottom: 30px;
- }
-
- #coupon h3,
- #subtotal h3{
- padding-bottom: 15px;
- }
-
- #coupon input {
-  padding: 10px 20px;
-  outline: none;
-  width: 60%;
-  margin-right: 10px;
-  border: 1px solid #e2e9e1;
- }
-
- .product_details{
-  margin: 7px;
- }
-
- .container {
-  position: fixed;
-  top: 100px;
-  right: 10px;
-}
-
-.alert_notification {
-  background-color: #e41749;
-  border: 2px solid #e99e9e;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  color:white;
-}
-.success_notification {
-  background-color: #12c99b;
-  border: 2px solid #bfefb3;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  color:white;
-}
-.styled-input:focus {
-  border-color: #007bff; /* Change border color on focus */
-}
-
