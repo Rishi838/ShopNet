@@ -66,21 +66,18 @@ async function fetch_orders() {
     const item = orders[i];
     document.getElementById("prev-orders").innerHTML += `
     <tr>
-    <td>${i + 1}</td>
-    <td>${item._id}</td>
-    <td>${item.totalAmount}</td>
-    <td>${item.shippingAddress}</td>
-    <td>${item.status}</td>
-    <td>${
+    <td scope="row">${item._id}</th>
+    <td data-title="Total">${item.totalAmount}</td>
+    <td data-title="Delievery Location">${item.shippingAddress}</td>
+    <td data-title="Order Status" >${item.status}</td>
+    <td data-title="Cancel">${
       item.status == "Inventory" ||
       item.status == "Shipped" ||
       item.status == "OutForDelievery"
         ? `<a href='#' id='${item._id}cancel'>Cancel</a>`
         : "NA"
     }</td>
-    <td class="receipt" style="color:blue;cursor:pointer"id="${
-      item._id
-    }receipt">Receipt</td>
+    <td data-title="Receipt" style="color:blue;cursor:pointer" id="${item._id}receipt">Receipt</td>
     </tr>
       `;
   }
