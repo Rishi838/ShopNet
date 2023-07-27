@@ -4,15 +4,21 @@ async function validate_user() {
   const result = await postData("/validate", {});
   if (result.validate == 1) {
     document.getElementById("nav_auth").style.display = "none";
-    document.getElementById("nav_profile").style.display = "block";
+    document.getElementById("nav_logout").style.display = "block";
   } else {
     document.getElementById("nav_auth").style.display = "block";
-    document.getElementById("nav_profile").style.display = "none";
+    document.getElementById("nav_logout").style.display = "none";
   }
 }
+
+document.getElementById('nav_logout').addEventListener('click',async()=>{
+  const result=await postData('/logout',{});
+  console.log(result)
+ await validate_user()
+})
 validate_user();
 
-function createNotification(message,type) {
+function createNotification(message,type,time) {
   const notification = document.createElement('div');
   notification.classList.add(type);
   notification.textContent = message;
@@ -21,11 +27,11 @@ function createNotification(message,type) {
 
   setTimeout(() => {
     notification.remove();
-  }, 1500);
+  }, time);
 }
 
 function open_product(id){
-  return ()=>{
+  return ()=>{   
     location.href = `/product/webpage/${id}`
   }
 }
@@ -33,10 +39,10 @@ function add_to_cart(id){
   return async()=>{
     const result = await postData('/add_to_cart',{"items" : [{"productId" : id,"quantity" :1} ]})
     if(result.validate != null && result.validate==0){
-      createNotification('Authenticate Yourself',"alert_notification");
+      createNotification('Authenticate Yourself',"alert_notification",3000);
     }
     else{
-      createNotification("Product Added","success_notification");
+      createNotification("Product Added","success_notification",3000);
     }
   }
 }
@@ -68,5 +74,7 @@ async function fetch_products(id,url) {
     }
   }
 }
-fetch_products("prod1",'/products');
+fetch_products("prod1",'/trending_products');
+fetch_products("prod2",'/products/category/Mens Shirt');
 // fetch_products("prod2",'/products');
+

@@ -1,5 +1,26 @@
 import { postData } from "../frontend_utils/fetch_api.js";
-function createNotification(message,type) {
+
+async function validate_user() {
+  const result = await postData("/validate", {});
+  if (result.validate == 1) {
+    document.getElementById("nav_auth").style.display = "none";
+    document.getElementById("nav_logout").style.display = "block";
+  } else {
+    document.getElementById("nav_auth").style.display = "block";
+    document.getElementById("nav_logout").style.display = "none";
+  }
+}
+
+document.getElementById('nav_logout').addEventListener('click',async()=>{
+  const result=await postData('/logout',{});
+  console.log(result)
+ await validate_user()
+})
+validate_user();
+
+var productCategory;
+
+function createNotification(message,type,time) {
   const notification = document.createElement('div');
   notification.classList.add(type);
   notification.textContent = message;
@@ -8,27 +29,46 @@ function createNotification(message,type) {
 
   setTimeout(() => {
     notification.remove();
-  }, 1500);
+  }, time);
 }
-var productCategory;
-
-
+function open_similar_product(id){
+  return ()=>{   
+    location.href = `/product/webpage/${id}`
+  }
+}
+function add_similar_to_cart(id){
+  return async()=>{
+    const result = await postData('/add_to_cart',{"items" : [{"productId" : id,"quantity" :1} ]})
+    if(result.validate != null && result.validate==0){
+      createNotification('Authenticate to perform this action',"alert_notification",5000);
+    }
+    else{
+      createNotification('Added to cart',"success_notification",5000);
+    }
+  }
+}
 function add_to_cart(id){
   return async()=>{
     const quantity = document.getElementById(`${id}quantity`).value
     const result = await postData('/add_to_cart',{"items" : [{"productId" : id,"quantity" :quantity} ]})
     if(result.validate != null && result.validate==0){
-      createNotification('Authenticate Yourself',"alert_notification");
+      createNotification('Authenticate to perform this action',"alert_notification",5000);
     }
     else{
-      createNotification("Product Added","success_notification");
+      createNotification('Added to cart',"success_notification",5000);
     }
   }
 }
 function buy_now(id){
-  return ()=>{
+  return async ()=>{
+    const result = await postData('/validate',{})
+    if(result.validate != null && result.validate==0){
+      createNotification('Authenticate to perform this action',"alert_notification",5000);
+    }
+    else{
    const quantity = document.getElementById(`${id}quantity`).value
    location.href = `/checkout?source=product&productId=${id}&quantity=${quantity}`
+    }
   }
 }
 async function fetch_product() {
@@ -107,6 +147,7 @@ async function fetch_similar_product(){
     const products = result.products;
     const star = `<i class="fas fa-star"></i>`;
     let s="";
+    console.log(productId)
     for(let i=0;i<products.length;i++)
     {
         if(products[i]._id == productId)
@@ -114,22 +155,32 @@ async function fetch_similar_product(){
       s+=
       `
       <div class="pro">
-      <img src="../../${products[i].Image[0]}" alt="">
+      <img src="../../${products[i].Image[0]}" alt="" id="${products[i]._id}" >
       <div class="des">
-          <span>${products[i].Brand}</span>
+          <span>${products[i].Attributes.Brand}</span>
           <h5>${products[i].Name}</h5>
           <div class="star">
           ${star.repeat(products[i].Rating)}
           </div>
           <h4>$${products[i].Price}</h4>
       </div  >
-      <i class="fa-sharp fa-solid fa-cart-shopping cart" style="width: 40px;height: 20px;"></i>
+      <i id="${products[i]._id}cart" class="fa-sharp fa-solid fa-cart-shopping cart" style="width: 40px;height: 20px;"></i>
   </div>
       `
     }
     if(s=="")
     s= "No more products in this category"
     document.getElementById("similarProduct").innerHTML=s;
+    for (let i = 0; i < products.length; i++) {
+      if(products[i]._id == productId)
+        continue;
+      if (products.includes(products[i])) {
+      let element1 = document.getElementById(`${products[i]._id}`)
+      element1.addEventListener("click", open_similar_product(products[i]._id));
+      let element2 = document.getElementById(`${products[i]._id}cart`)
+      element2.addEventListener("click", add_similar_to_cart(products[i]._id));
+      }
+    }
 }
 
 fetch_similar_product()

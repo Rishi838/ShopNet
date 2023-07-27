@@ -1,15 +1,21 @@
 import { postData } from "../frontend_utils/fetch_api.js";
 async function validate_user() {
   const result = await postData("/validate", {});
-  if (result.validate == 0) {
-    document.querySelector("body").innerHTML =
-      "<h1>Please Authenticate Yourself before placing an order,Redirecting You to Login Page</h1>";
-    setTimeout(() => {
-      location.href = "/auth";
-    }, 3000);
+  if (result.validate == 1) {
+    document.getElementById("nav_auth").style.display = "none";
+    document.getElementById("nav_logout").style.display = "block";
+  } else {
+    document.querySelector('body').innerHTML = "<p> You need to authenticate before accessing this webpage, Redirecting to login page</p>"
+    setTimeout(()=>{
+      location.href = "/auth"
+    },3000)
   }
 }
-validate_user();
+document.getElementById('nav_logout').addEventListener('click',async()=>{
+  const result=await postData('/logout',{});
+ await validate_user()
+})
+validate_user()
 
 const params = new URLSearchParams(window.location.search);
 const source = params.get("source");

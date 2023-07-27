@@ -44,7 +44,9 @@ p {
 .logo{
   width: 140px;
   mix-blend-mode: multiply;
-  transform: scale(1.2);
+}
+#nav_logout:hover{
+  cursor: pointer;
 }
 .section-p1 {
   padding: 40px 80px;
@@ -65,6 +67,7 @@ button.normal {
   border: none;
   outline: none;
   transition: 0.2s;
+  margin-top: 4px;
 }
 
 button.white {
@@ -1276,3 +1279,4 @@ border-radius: 20px;
 .styled-input:focus {
   border-color: #007bff; /* Change border color on focus */
 }
+

@@ -4,20 +4,26 @@ async function validate_user() {
   const result = await postData("/validate", {});
   if (result.validate == 1) {
     document.getElementById("nav_auth").style.display = "none";
-    document.getElementById("nav_profile").style.display = "block";
+    document.getElementById("nav_logout").style.display = "block";
   } else {
+    createNotification("Login Before Seing Your orders","alert_notification",5000)
     document.getElementById("nav_auth").style.display = "block";
-    document.getElementById("nav_profile").style.display = "none";
+    document.getElementById("nav_logout").style.display = "none";
+    document.getElementById("prev-orders").innerHTML = ""
   }
 }
 
+document.getElementById('nav_logout').addEventListener('click',async()=>{
+  const result=await postData('/logout',{});
+  console.log(result)
+ await validate_user()
+})
 validate_user();
 
-function createNotification(message,type) {
+function createNotification(message,type,time) {
   const notification = document.createElement('div');
   notification.classList.add(type);
   notification.textContent = message;
-  console.log(notification)
   document.getElementById('notificationContainer').appendChild(notification);
   setTimeout(() => {
     notification.remove();
@@ -40,8 +46,8 @@ function cancel_order(id){
     {
       const response = await postData(`/orders/cancel/${id}`,{})
       await fetch_orders()
-      createNotification(`Order with id: ${id} Canceled Successfully`,"success_notification")
-      createNotification(`Your payment has been refunded Successfully`,"success_notification")
+      createNotification(`Order with id: ${id} Canceled Successfully`,"success_notification",5000)
+      createNotification(`Your payment has been refunded Successfully`,"success_notification",5000)
     }
   }
 }

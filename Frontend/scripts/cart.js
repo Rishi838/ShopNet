@@ -3,14 +3,34 @@ async function validate_user() {
   const result = await postData("/validate", {});
   if (result.validate == 1) {
     document.getElementById("nav_auth").style.display = "none";
-    document.getElementById("nav_profile").style.display = "block";
+    document.getElementById("nav_logout").style.display = "block";
   } else {
+    createNotification("Authenticate to access cart","alert_notification",5000);
     document.getElementById("nav_auth").style.display = "block";
-    document.getElementById("nav_profile").style.display = "none";
+    document.getElementById("nav_logout").style.display = "none";
+    document.getElementById("cart-items").innerHTML =""
+    document.getElementById("cart-subtotal").innerHTML =""
+    document.getElementById("cart-total").innerHTML =""
   }
 }
+
+document.getElementById('nav_logout').addEventListener('click',async()=>{
+  const result=await postData('/logout',{});
+ await validate_user()
+})
 validate_user();
 
+function createNotification(message,type,time) {
+  const notification = document.createElement('div');
+  notification.classList.add(type);
+  notification.textContent = message;
+
+  document.getElementById('notificationContainer').appendChild(notification);
+
+  setTimeout(() => {
+    notification.remove();
+  }, time);
+}
 function change_listner(Currentkey, price) {
   return async function () {
     const new_quantity = document.getElementById(`${Currentkey}quantity`).value;
@@ -22,6 +42,7 @@ function change_listner(Currentkey, price) {
     document.getElementById(`${Currentkey}total`).innerText = `${new_total}`;
     document.getElementById('cart-subtotal').innerHTML = `${result.TotalPrice}`
     document.getElementById('cart-total').innerHTML = `${result.TotalPrice}`
+    createNotification("Quantity Updated Successfully","success_notification",3000);
   };
 }
 function remove_listner(Currentkey) {
@@ -32,6 +53,7 @@ function remove_listner(Currentkey) {
     document.getElementById('cart-subtotal').innerHTML = `${result.TotalPrice}`
     document.getElementById('cart-total').innerHTML = `${result.TotalPrice}`
     fetch_cart();
+    createNotification("Item Removed successfully","success_notification",3000);
   };
 }
 async function fetch_cart() {

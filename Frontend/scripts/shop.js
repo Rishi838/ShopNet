@@ -1,39 +1,45 @@
-import { postData } from "../frontend_utils/fetch_api.js";
+import { postData } from "../frontend_utils/fetch_api.js"
 const radioContainer = document.getElementById('radio-container');
 
 async function validate_user() {
   const result = await postData("/validate", {});
   if (result.validate == 1) {
     document.getElementById("nav_auth").style.display = "none";
-    document.getElementById("nav_profile").style.display = "block";
+    document.getElementById("nav_logout").style.display = "block";
   } else {
     document.getElementById("nav_auth").style.display = "block";
-    document.getElementById("nav_profile").style.display = "none";
+    document.getElementById("nav_logout").style.display = "none";
   }
 }
+function createNotification(message,type,time) {
+  const notification = document.createElement('div');
+  notification.classList.add(type);
+  notification.innerHTML = message;
+
+  document.getElementById('notificationContainer').appendChild(notification);
+
+  setTimeout(() => {
+    notification.remove();
+  }, time);
+}
+
+document.getElementById('nav_logout').addEventListener('click',async()=>{
+  const result=await postData('/logout',{});
+ await validate_user()
+})
 validate_user();
 
 // Add event listener to the container element
-radioContainer.addEventListener('change', handleGenderChange);
+radioContainer.addEventListener('change', handleCategoryChange);
 
-async function handleGenderChange(event) {
+async function handleCategoryChange(event) {
   const category = event.target.value;
-  console.log(`Gender changed to: ${category}`);
+  createNotification("Category Changed Successfully","success_notification",5000)
   await fetch_products("prod1",`/products/category/${category}`)
 
 }
 
-function createNotification(message,type) {
-    const notification = document.createElement('div');
-    notification.classList.add(type);
-    notification.textContent = message;
-  
-    document.getElementById('notificationContainer').appendChild(notification);
-  
-    setTimeout(() => {
-      notification.remove();
-    }, 1500);
-  }
+
   
 function open_product(id){
     return ()=>{
@@ -44,10 +50,10 @@ function add_to_cart(id){
     return async()=>{
       const result = await postData('/add_to_cart',{"items" : [{"productId" : id,"quantity" :1} ]})
       if(result.validate != null && result.validate==0){
-        createNotification('Authenticate Yourself',"alert_notification");
+        createNotification('Authenticate to perform this action',"alert_notification",5000);
       }
       else{
-        createNotification("Product Added","success_notification");
+        createNotification('Added to cart',"success_notification",5000);
       }
     }
 }
@@ -87,4 +93,4 @@ async function fetch_products(id,url) {
       }
     }
   }
-fetch_products("prod1",'/products');
+fetch_products("prod1",'/products')

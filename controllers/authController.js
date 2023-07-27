@@ -10,14 +10,15 @@ require("dotenv").config();
 let mailTransporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "learnandearn419@gmail.com",
-    pass: "qlnsscovewpsjvsq",
+    user: "shopnetauthorisation@gmail.com",
+    pass: "yuvyxsnyhiyakuse",
   },
 });
 
 module.exports.signup = async (req, res) => {
   try {
     // Checking all details required for signing up is given
+   
     if (!req.body.email || !req.body.password || !req.body.name)
       return res
         .status(404)
@@ -47,6 +48,7 @@ module.exports.signup = async (req, res) => {
     // Setting expiration time for OTP
     const expirationTime = new Date();
     expirationTime.setSeconds(expirationTime.getSeconds() + 600);
+    console.log("Content made");
     // Creating a new user
     let resp = await user_login.create({
       Email: req.body.email,
@@ -55,15 +57,18 @@ module.exports.signup = async (req, res) => {
       EmailToken: x,
       ExpiresAt: expirationTime,
     });
+
     // Sending Verificaion Email
     let mailDetails = {
-      from: "learnandearn419@gmail.com",
+      from: "shopnetauthorisation@gmail.com",
       to: req.body.email,
       subject: "Authorization for ShopNet",
       html: emailHTML,
     };
+    console.log("Mail Details Made")
     mailTransporter.sendMail(mailDetails, function (err, data) {
       if (err) {
+        console.log("Some error occured",err)
         return res.status(400).json({
           success: -1,
           message: "Email Don't Exist, Enter a Valid Email",
@@ -77,6 +82,7 @@ module.exports.signup = async (req, res) => {
       }
     });
   } catch (error) {
+    console.log(error)
     return res.status(400).json({ success: -1, message: "Email Dont Exist" });
   }
 };
@@ -228,16 +234,18 @@ module.exports.resend = async (req, res) => {
 };
 module.exports.logout = async (req, res) => {
   const refresh_token = req.cookies.refresh_token;
+  const access_token = req.cookies.access_token;
+  if(access_token)
+  res.clearCookie("access_token");
   if(!refresh_token)
   return res.status(404).json({message: "No user is Specified(null refresh token)"})
   const user = await user_login.findOne({ RefreshToken: refresh_token });
-  console.log(user);
+
   if(!user)
   return res.status(404).json({message : "User Already Logged Out"});
   user.RefreshToken = null
   await user.save()
   res.clearCookie("refresh_token");
-  res.clearCookie("access_token");
   return res.status(200).json({ message: "User Logged out successfully" });
 };
 module.exports.validate = async(req,res) =>{

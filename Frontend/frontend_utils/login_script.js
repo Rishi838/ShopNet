@@ -194,6 +194,6 @@ export async function resend_listner() {
 export async function validate_user(){
   const result = await postData('/validate' ,{})
   if(result.validate == 1){
-  document.querySelector('body').innerHTML = "User is already authenticated, Please Log Out before loging again"
+  document.querySelector('body').innerHTML = "User is already authenticated,Can not login"
   }
 }

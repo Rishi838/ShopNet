@@ -61,7 +61,7 @@ module.exports.get_category = async(req,res)=>{
 }
 module.exports.get_trending = async(req,res)=>{
   try{
-   const result = await product.find({Trending: true})
+   const result = await product.find({"Trending": true})
    if(!result)
    return res.status(404).json({success:0,message: "No Products Trending right now"})
    return res.status(200).json({success:1,message:"Products under this category fetched successfully",products:result})
