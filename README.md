@@ -1,124 +1,57 @@
-ShopNet
-=========
-### About ShopNet
+# ShopNet
 
-ShopNet is NodeJS, Express and MongoDB based ecommerce app where user can purchase products . It has a paypal payment gateway integrated with it to process payments.
-
-### Features
-
-  - JWT based Safe Authentication System
-  - Add to Cart and Order Place Facility
-  - PayPal payment gateway
-  - Immediate Refund on Payment Cancelation
-  - Track your current order status and previous order
-  - MVC(Models Views Controllers) Approach for easy understanding and debugging of code
-
-### Install it in your System :
-      
-      Run `git clone ${Repo_URL}` in the directory you want to install the project
-      In the same directory run `npm init` and `npm install` to install required modules
-      Run `npm start` to start you Application
-
-### API Information (ONLY for backend developer)
-
-URL = BASE URL of Your Application (Eg : http://localhostL3000) 
-- #### Signup Route
-
-Route : `${URL}/signup` <br>
-Method : POST <br>
-JSON BODY : {<br>
-  "name" : "YOUR_NAME_HERE",<br>
-  "email" : "YOUR_Email_HERE",<br>
-  "password" : "Your_password_here"<br>
-  }<br>
-<br>
-  On successfull request, a verification email is sent to the mentioned email id
-
-- #### Verification Route
-
-This route is to verify the user email and is invoked after the  verification linked is clicked
-
-Route : `${URL}/verify?email=${YOUR_EMAIL_HERE} & token=${Signup Token}` <br>
-Method : POST <br>
-JSON BODY : {}<br>
-  On successfull request, access token and refresh token will be returned and stored as cookie
-
-- #### Login Route
-
-This route is to verify the user email and is invoked after the  verification linked is clicked
-
-Route : `${URL}/login` <br>
-Method : POST <br>
-JSON BODY : {<br>
-  "email" : "YOUR_Email_HERE",<br>
-  "password" : "Your_password_here"<br>
-  }<br>
-  On successfull request, access token and refresh token will be returned and stored as cookie
-
-## Below API's has a middleware enabled, so before hitting on these endpoints make sure you are login and tokens are stored as cookies
-
-- #### Add to Cart Route
-
-Route : `${URL}/add_to_cart` <br>
-Method : POST <br>
-JSON BODY : {<br>
-  "items" : "Items array where each element is JSON object with two fields {productId and quantity} where productId must be a valid product in database",<br>
-  }<br>
-  On successfull request, all items will be added to the user cart
-
-- #### Fetch Cart Route
-
-Route : `${URL}/fetch_cart` <br>
-Method : POST <br>
-JSON BODY : {}<br>
-  On successfull request, cart associated with the user is fetched
-
-- #### Place Order(Payment Initiation)
+<img src="https://github.com/Rishi838/ShopNet/assets/77577908/41b3f915-dab5-4206-b819-26e38fa11c77" style="width:140px; height:80px">
 
 
-Route : `${URL}/payments/initiate` <br>
-Method : POST <br>
-JSON BODY : {<br>
-"items" : "Items array where each element is JSON object with two fields {product and quantity}",<br>
-"ammount" : "TOTAL_ORDER_AMOUNT"<br>
-"address" : "SHIPPING ADDRESS"<br>
-}<br>
-  On successfull request, a payment will be initiated and paymentID,orderID wull be returned
+Welcome to our Ecommerce Store! This is a live website where customers can browse and purchase products online. Our store offers a wide range of high-quality products, from electronics and fashion to home goods and accessories.
 
- - #### Confirm Order(Payment Verification)
+## Table of Contents
 
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Getting Started](#getting-started)
+5. [Installation](#installation)
 
-Route : `${URL}/payments/${orderID}/verify` <br>
-Method : POST <br>
-JSON BODY : {<br>
-"orderId" : "YOUR PAYMENTID HERE"<br>
-}<br>
-  On successfull request, payment will be verified and success status will be returned
+## Introduction
 
-- #### Track An Order
+Our Ecommerce Store provides a convenient and secure platform for customers to shop online. With a user-friendly interface and a wide variety of products, we aim to make online shopping a pleasant experience for everyone. The website is live and can be accessed at [www.ecommercestore.com](https://shopnet.onrender.com).
 
+## Features
 
-Route : `${URL}/orders/${orderID}` <br>
-Method : POST <br>
-JSON BODY : {}<br>
-  On successfull request, all info regarding the order is returned if the order is associated with current user
+- User Registration and Authentication: Customers can create accounts and log in securely(JWT Authentication).
+- Product Categories: Products are organized into different categories for easy navigation.
+- Product Details: Detailed information about each product is available on its page.
+- Shopping Cart: Customers can add items to their carts for future purchase.
+- Checkout Process: A smooth checkout process for placing orders and making payments.
+- Order History: Users can view their past orders and order statuses.
+- Secure Payments: We ensure the safety and security of online transactions with paypal sandbox account.
+- Responsive Design: The website is optimized for different devices, including mobile phones and tablets.
 
-- #### Track All previous order
+## Technologies Used
 
+- Frontend: HTML, CSS, JavaScript
+- Backend: Node.js, Express.js
+- Database: MongoDB
+- Payment Processing: PayPal
+- Deployment: Render
 
-Route : `${URL}/orders` <br>
-Method : POST <br>
-JSON BODY : {}<br>
-  On successfull request, information regarding all previous orders is returned
+## Getting Started
 
-- #### Cancel Order
+To run the project locally on your machine, follow these instructions.
 
+### Installation
 
-Route : `${URL}/orders/cancel/${OrderID}` <br>
-Method : POST <br>
-JSON BODY : {}<br>
-  On successfull request, if that order is associated with user, his order will be canceled and his payment will bbe refunded
+1. Clone this repository to your local machine.
 
+        git clone https://github.com/Rishi838/ShopNet.git
+2. Install the required dependencies.
 
+       npm install
+3. Start the development server.
 
-  
+       npm start
+
+If you have any questions or need assistance, please feel free to contact our support team at `shopnetauthorisation@gmail.com`.
+
+Thank you for using our Ecommerce Store! Happy shopping!
