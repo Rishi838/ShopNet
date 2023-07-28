@@ -15,6 +15,7 @@ Welcome to our Ecommerce Store! This is a live website where customers can brows
 6. API's
 7. Important Links
 8. Frontend Demonstration
+9. Support
 
 ## Introduction
 
@@ -135,7 +136,9 @@ Base URL: http://shopnet.onrender.com
 <br><br>
 <img src="https://github.com/Rishi838/ShopNet/assets/77577908/5dacdab0-0bb2-4761-b809-a4ffeda2b60c">
 
-<br><br>
+<br>
+
+## Support
 
 If you have any questions or need assistance, please feel free to contact our support team at `shopnetauthorisation@gmail.com`.
 
