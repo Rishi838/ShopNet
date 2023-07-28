@@ -8,18 +8,25 @@ Welcome to our Ecommerce Store! This is a live website where customers can brows
 ## Table of Contents
 
 1. Introduction
-2. Features
-3. Technologies Used
-4. Getting Started
-5. Installation
-6. API's
-7. Important Links
-8. Frontend Demonstration
-9. Support
+2. Video Demonstration
+3. Features
+4. Technologies Used
+5. Getting Started
+6. Installation
+7. API's
+8. Important Links
+9. Frontend Demonstration
+10. Support
 
 ## Introduction
 
 Our Ecommerce Store provides a convenient and secure platform for customers to shop online. With a user-friendly interface and a wide variety of products, we aim to make online shopping a pleasant experience for everyone. The website is live and can be accessed at [ShopNet](https://shopnet.onrender.com).
+
+## Video Demonstration
+
+[![Demo Video Thumbnail](https://github.com/Rishi838/ShopNet/assets/77577908/5a71b669-af8f-48b9-aae1-d0aba3a963d2)](https://youtu.be/6dQbnnrpJSo)
+
+Click the image above to watch the demo video of our Ecommerce Store in action!
 
 ## Features
 
