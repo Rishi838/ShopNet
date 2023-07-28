@@ -112,27 +112,27 @@ Base URL: http://shopnet.onrender.com
 </div>
 <br><br>
 2. Shop Page with Category Listing
-
+<br><br>
 <img src="https://github.com/Rishi838/ShopNet/assets/77577908/a68d88a1-d8ee-4882-a01d-ef5c93886a87">
 <br><br>
 3. Orders Page to track orders and download receipt
-
+<br><br>
 <img src="https://github.com/Rishi838/ShopNet/assets/77577908/78829164-5da5-42d2-8e16-7eca8f80fa52">
 <br><br>
 4. Easily Modify Your Cart
-
+<br><br>
 <img src="https://github.com/Rishi838/ShopNet/assets/77577908/c1233b12-4ddf-4697-ac18-e36fe5f02e19">
-<br>br>
+<br><br>
 5. Fully Secure Checkout Page
-
+<br><br>
 <img src="https://github.com/Rishi838/ShopNet/assets/77577908/39c8df2d-e932-4582-a003-6e341de0888a">
 <br><br>
 6. Fully Secure Payment Gateway
-
+<br><br>
 <img src="https://github.com/Rishi838/ShopNet/assets/77577908/95488a18-086e-42df-b56c-bd0f1281b36b">
-<br>br>
+<br><br>
 7. JWT Based Login Page
-
+<br><br>
 <img src="https://github.com/Rishi838/ShopNet/assets/77577908/5dacdab0-0bb2-4761-b809-a4ffeda2b60c">
 
 <br><br>
