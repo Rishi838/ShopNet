@@ -56,18 +56,24 @@ if (source === "product") {
   const product = result.product;
   const total_sum = quantity * product.Price;
   document.getElementById("ordered_items").innerHTML = `
-  <tr>
-    <td><img src="${product.Image[0]}" alt=""></td>
-    <td>${product.Name}</td>
-    <td>$${product.Price}</td>
-    <td>${quantity}</td>
-    <td>$${total_sum}</td>
-  </tr>
+  <div class="product">
+          <div class="product-image">
+            <img src="${product.Image[0]}" />
+          </div>
+          <div class="product-details">
+            <div class="product-title">${product.Name}</div>
+          </div>
+          <div class="product-price">${product.Price}</div>
+          <div class="product-quantity">
+          ${quantity}
+          </div>
+          <div class="product-line-price">${total_sum}</div>
+        </div>
   `;
-  document.getElementById("cart_subtotal").innerHTML = `$${total_sum}`;
+  document.getElementById("cart_subtotal").innerHTML = `${total_sum}`;
   document.getElementById(
     "cart_total"
-  ).innerHTML = `<strong>$${total_sum}</strong>`;
+  ).innerHTML = `<strong>${total_sum}</strong>`;
   const item = [{ product: productId, quantity: quantity }];
   document.getElementById("payment").addEventListener("click", async () => {
     const address = document.getElementById("address").value;
@@ -122,7 +128,6 @@ if (source === "product") {
   const response = await fetch(`/fetch_cart`);
   const result = await response.json();
   const Cart = result.cart;
-  console.log(result)
   if (result.success == 0 || Cart.total==0) {
     document.getElementById("ordered_items").innerHTML = "No item in this cart";
   } else {
