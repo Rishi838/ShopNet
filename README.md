@@ -14,6 +14,7 @@ Welcome to our Ecommerce Store! This is a live website where customers can brows
 5. Installation
 6. API's
 7. Important Links
+8. Frontend Demonstration
 
 ## Introduction
 
@@ -100,9 +101,41 @@ Base URL: http://shopnet.onrender.com
 
         https://cloud.mongodb.com/v2/64a3fd82e18e3401eebd97a6#/clusters/detail/ShopNet
 
-     
+## Frontend Demonstration
 
-     
+1. Completely responsive Home Page
+   <div style="display: flex; justify-content: center;">
+  <!-- Replace "image1.png" with the actual path or URL of your first image -->
+  <img src="https://github.com/Rishi838/ShopNet/assets/77577908/15d3c0bc-573f-4ad2-8467-d9d7f19cadee" alt="Image 1" style="width: 40vw; height: auto; margin-right: 20px;">
+  <!-- Replace "image2.png" with the actual path or URL of your second image -->
+  <img src="https://github.com/Rishi838/ShopNet/assets/77577908/f041cfa0-2615-4ef6-bfcb-889f7f68b3a3" alt="Image 2" style="width: 20vw; height: 311px;">
+</div>
+<br><br>
+2. Shop Page with Category Listing
+
+<img src="https://github.com/Rishi838/ShopNet/assets/77577908/a68d88a1-d8ee-4882-a01d-ef5c93886a87">
+<br><br>
+3. Orders Page to track orders and download receipt
+
+<img src="https://github.com/Rishi838/ShopNet/assets/77577908/78829164-5da5-42d2-8e16-7eca8f80fa52">
+<br><br>
+4. Easily Modify Your Cart
+
+<img src="https://github.com/Rishi838/ShopNet/assets/77577908/c1233b12-4ddf-4697-ac18-e36fe5f02e19">
+<br>br>
+5. Fully Secure Checkout Page
+
+<img src="https://github.com/Rishi838/ShopNet/assets/77577908/39c8df2d-e932-4582-a003-6e341de0888a">
+<br><br>
+6. Fully Secure Payment Gateway
+
+<img src="https://github.com/Rishi838/ShopNet/assets/77577908/95488a18-086e-42df-b56c-bd0f1281b36b">
+<br>br>
+7. JWT Based Login Page
+
+<img src="https://github.com/Rishi838/ShopNet/assets/77577908/5dacdab0-0bb2-4761-b809-a4ffeda2b60c">
+
+<br><br>
 
 If you have any questions or need assistance, please feel free to contact our support team at `shopnetauthorisation@gmail.com`.
 
