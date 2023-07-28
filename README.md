@@ -1,18 +1,19 @@
 # ShopNet
 
-<img src="https://github.com/Rishi838/ShopNet/assets/77577908/41b3f915-dab5-4206-b819-26e38fa11c77" style="width:140px; height:80px">
+<img src="https://github.com/Rishi838/ShopNet/assets/77577908/366c7dcf-fe08-4d3f-ac2d-fefb18e111a5" style="width:140px; height:80px">
 
 
 Welcome to our Ecommerce Store! This is a live website where customers can browse and purchase products online. Our store offers a wide range of high-quality products, from electronics and fashion to home goods and accessories.
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. [Features](#features)
-3. [Technologies Used](#technologies-used)
-4. [Getting Started](#getting-started)
-5. [Installation](#installation)
-6. [API's](#api's)
+1. Introduction
+2. Features
+3. Technologies Used
+4. Getting Started
+5. Installation
+6. API's
+7. Important Links
 
 ## Introduction
 
@@ -41,7 +42,7 @@ Our Ecommerce Store provides a convenient and secure platform for customers to s
 
 To run the project locally on your machine, follow these instructions.
 
-### Installation
+## Installation
 
 1. Clone this repository to your local machine.
 
@@ -53,7 +54,7 @@ To run the project locally on your machine, follow these instructions.
 
        npm start
 
-### API's
+## API's
 
 Base URL: http://shopnet.onrender.com
 
@@ -74,10 +75,30 @@ Base URL: http://shopnet.onrender.com
 
 3. Order API's
 
-       Payment Initiate     - METHOD/POST   - "Base URL/add_to_cart"
-       Fetch Cart      - METHOD/GET    - "Base URL/fetch_cart"
-       Remove Cart     - METHOD/POST   - "Base URL/remove_from_cart"
-       Change Quantity - METHOD/POST  - "BASE URL/change_quantity"
+       Payment Initiate     - METHOD/POST   - "Base URL/payments/initiate"
+       Payment Verification - METHOD/POST   - "Base URL/payments/:orderDatabaseId/verify"
+       Order detail         - METHOD/POST   - "Base URL/orders/:orderId"
+       All orders           - METHOD/POST   - "BASE URL/orders"
+       Cancel Order         - METHOD/POST   - "BASE URL/orders/cancel/:orderId"
+       Generate Receipt     - METHOD/GET    - "BASE URL/receipt/:id"
+
+4. Product API's
+
+       Add Product          - METHOD/POST   - "Base URL/add_products"
+       Product Details      - METHOD/GET    - "Base URL/products/:productId"
+       All Product          - METHOD/GET    - "Base URL/products"
+       Category Products    - METHOD/GET    - "BASE URL/products/category/:categoryId"
+       Trending Products    - METHOD/GET    - "BASE URL/trending_products"
+
+## Links
+
+1. Postman Collection
+
+       https://www.postman.com/orbital-module-engineer-55914537/workspace/shopnet/collection/25555336-77f00d14-0629-4e04-bc7d-32618b60aded?action=share&creator=25555336
+
+2.  MongoDB Database
+
+        https://cloud.mongodb.com/v2/64a3fd82e18e3401eebd97a6#/clusters/detail/ShopNet
 
      
 
