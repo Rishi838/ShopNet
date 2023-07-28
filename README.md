@@ -107,7 +107,7 @@ Base URL: http://shopnet.onrender.com
 1. Completely responsive Home Page
    <div style="display: flex; justify-content: center;">
   <!-- Replace "image1.png" with the actual path or URL of your first image -->
-  <img src="https://github.com/Rishi838/ShopNet/assets/77577908/15d3c0bc-573f-4ad2-8467-d9d7f19cadee" alt="Image 1" style="width: 40vw; height: auto; margin-right: 20px;">
+  <img src="https://github.com/Rishi838/ShopNet/assets/77577908/15d3c0bc-573f-4ad2-8467-d9d7f19cadee" alt="Image 1" style="width: 30vw; height: auto; margin-right: 20px;">
   <!-- Replace "image2.png" with the actual path or URL of your second image -->
   <img src="https://github.com/Rishi838/ShopNet/assets/77577908/f041cfa0-2615-4ef6-bfcb-889f7f68b3a3" alt="Image 2" style="width: 20vw; height: 311px;">
 </div>
