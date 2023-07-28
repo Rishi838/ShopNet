@@ -1113,7 +1113,7 @@ border-radius: 20px;
 
  .container {
   position: fixed;
-  top: 100px;
+  top: 150px;
   right: 10px;
 }
 
@@ -1281,13 +1281,21 @@ border-radius: 20px;
     border-bottom: 1px solid #e2e9e1;
  }
 }
+@media (max-width: 48em) {
+  .responsive-table tbody td[scope="row"] {
+    background-color: transparent;
+    color: rgba(0, 0, 1);
+    font-weight: 600;
+    text-align: left;
+ }
+}
 
 
 .responsive-table tbody td[data-title]:before {
   content: attr(data-title);
   float: left;
   font-size: 0.8em;
-  color: rgba(0, 0, 0, .54);
+  color: rgba(13, 6, 6);
   text-align: right;
 }
 @media (min-width: 30em) {

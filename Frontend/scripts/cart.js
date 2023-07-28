@@ -65,6 +65,8 @@ async function fetch_cart() {
   if (success == 0 || cart_data.total==0) {
     document.getElementById("cart-items").innerHTML =
       "This user has no elements in his cart";
+      document.getElementById("cart-items").style.textAlign="center"
+      document.getElementById("cart-items").style.marginTop= "25px";
   } else if (success == 1) {
     document.getElementById('cart-subtotal').innerHTML = `${cart_data.total}`
     document.getElementById('cart-total').innerHTML = `${cart_data.total}`
@@ -107,7 +109,8 @@ async function fetch_cart() {
         element2.addEventListener("click", remove_listner(key));
       }
     }
-    document.getElementById('checkout').addEventListener('click',async()=>{
+    document.getElementById('checkout').addEventListener('click',async()=>
+    {
       location.href = `/checkout?source=cart`
    })
   }
