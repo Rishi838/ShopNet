@@ -108,7 +108,6 @@ Base URL: http://shopnet.onrender.com
 <br><br>
 <img src="https://github.com/Rishi838/ShopNet/assets/77577908/15d3c0bc-573f-4ad2-8467-d9d7f19cadee">
 <br><br>
-<br><br>
 2. Shop Page with Category Listing
 <br><br>
 <img src="https://github.com/Rishi838/ShopNet/assets/77577908/a68d88a1-d8ee-4882-a01d-ef5c93886a87">
