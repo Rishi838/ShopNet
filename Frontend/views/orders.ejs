@@ -6,46 +6,57 @@
     <title>Orders - ShopNet</title>
     <link rel="icon" type="image/png" href="./Frontend/img/l1.png" />
     <link rel="stylesheet" href="./Frontend/stylesheet/home.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   </head>
   <body>
-    
     <section id="header">
-      <a href="/"><img src="./Frontend/img/logo.png" class="logo" /></a>
+      <header class="header-area">
+        <!-- site-navbar start -->
+        <div class="navbar-area">
+          <nav class="site-navbar">
+            <!-- site logo -->
+            <a href="/"><img src="./Frontend/img/logo.png" class="logo" /></a>
 
-      <div>
-        <ul id="navbar">
-          <li><a href="/">Home</a></li>
-          <li><a href="/shop">Shop</a></li>
-          <li><a class="active" href="/orders">Orders</a></li>
-          <li><a href="/auth" id="nav_auth">Authenticate</a></li>
-          <li><a id="nav_logout">Logout</a></li>
-          <li id="lg-bag"><a href="/cart" ><i class="fa fa-shopping-bag" aria-hidden="true" style="color: black;"></i></a></li>
-          <a href="#" id="close"><i class="fa fa-times" aria-hidden="true"></i></a>
-        </ul>
-      </div>
-      <div id="mobile">
-        <a href="/cart"
-          ><i
-            class="fa fa-shopping-bag"
-            aria-hidden="true"
-            style="color: black"
-          ></i
-        ></a>
-        <i id="bar" class="fa fa-outdent" aria-hidden="true"></i>
-      </div>
-      
+            <!-- site menu/nav -->
+            <ul>
+              <li>
+                <a href="/">home</a>
+              </li>
+              <li><a href="/shop">shop</a></li>
+              <li><a href="/orders" style="text-decoration: underline; color: #49b293">orders</a></li>
+              <li><a href="/auth" id="nav_auth">Authenticate</a></li>
+              <li><a id="nav_logout">Logout</a></li>
+              <li>
+                <a href="/cart"
+                  ><i
+                    style="color: black"
+                    class="fa fa-shopping-bag"
+                    aria-hidden="true"
+                  ></i
+                ></a>
+              </li>
+            </ul>
+
+            <!-- nav-toggler for mobile version only -->
+            <button class="nav-toggler">
+              <span></span>
+            </button>
+          </nav>
+        </div>
+        <!-- navbar-area end -->
+      </header>
     </section>
-    <div class="container" id="notificationContainer" style="z-index:3"></div>
+    <div class="container" id="notificationContainer" style="z-index: 3"></div>
     <section id="page-header" class="about-header">
-       
       <h2>#order_hub</h2>
       <p>"Streamlined Orders, Seamless Delivery"</p>
     </section>
 
     <section id="cart" class="section-p1">
-      
       <div class="order-container">
         <table class="responsive-table">
           <thead>
@@ -58,8 +69,7 @@
               <th scope="col">Reciept</th>
             </tr>
           </thead>
-          <tbody id="prev-orders">
-          </tbody>
+          <tbody id="prev-orders"></tbody>
         </table>
       </div>
     </section>

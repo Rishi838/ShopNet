@@ -13,39 +13,32 @@
   </head>
   <body>
     <section id="header">
-      <a href="/"><img src="./Frontend/img/logo.png" class="logo" /></a>
-
-      <div>
-        <ul id="navbar">
-          <li><a href="/">Home</a></li>
-          <li><a href="/shop">Shop</a></li>
-          <li><a href="/orders">Orders</a></li>
-          <li><a href="/auth" id="nav_auth">Authenticate</a></li>
-          <li><a id="nav_logout">Logout</a></li>
-          <li id="lg-bag">
-            <a class="active" href="cart"
-              ><i
-                class="fa fa-shopping-bag"
-                aria-hidden="true"
-                style="color: black"
-              ></i
-            ></a>
-          </li>
-          <a href="#" class="active" id="close"
-            ><i class="fa fa-times" aria-hidden="true"></i
-          ></a>
-        </ul>
-      </div>
-      <div id="mobile">
-        <a href="/cart"
-          ><i
-            class="fa fa-shopping-bag"
-            aria-hidden="true"
-            style="color: black"
-          ></i
-        ></a>
-        <i id="bar" class="fa fa-outdent" aria-hidden="true"></i>
-      </div>
+      <header class="header-area">
+        <!-- site-navbar start -->
+        <div class="navbar-area">
+         
+            <nav class="site-navbar">
+              <!-- site logo -->
+              <a href="/"><img src="./Frontend/img/logo.png" class="logo"></a>
+      
+              <!-- site menu/nav -->
+              <ul>
+                <li><a href="/">home</a></li>
+                <li><a href="/shop">shop</a></li>
+                <li><a href="/orders">orders</a></li>
+                <li><a href="/auth" id="nav_auth">Authenticate</a></li>
+                <li><a id="nav_logout">Logout</a></li>
+                <li ><a href="/cart" ><i style="color :#49b293" class="fa fa-shopping-bag" aria-hidden="true"></i></a></li>
+              </ul>
+      
+              <!-- nav-toggler for mobile version only -->
+              <button class="nav-toggler">
+                <span></span>
+              </button>
+            </nav>
+        
+        </div><!-- navbar-area end -->
+      </header>
     </section>
     <div class="container" id="notificationContainer" style="z-index: 3"></div>
     <section id="page-header" class="about-header">

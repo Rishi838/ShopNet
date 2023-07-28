@@ -87,10 +87,9 @@ body {
 }
 
 /*Header Start*/
-
 #header {
-  display: flex;
-  align-items: center;
+  /* display: flex; */
+  /* align-items: center; */
   justify-content: space-between;
   padding: 0px 80px;
   background: #E3E6F3;
@@ -100,52 +99,136 @@ body {
   top: 0;
   left: 0;
 }
+.header-area {
+  background: white;
+  background-position: center center;
+  background-size: cover;
+  /* z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0; */
+}
+/* default css end */
 
-#navbar {
+
+/* navbar regular css start */
+.navbar-area {
+  background: #E3E6F3;
+}
+.site-navbar {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
 }
 
-#navbar li{
+.site-navbar ul {
+  margin: 0;
+  padding: 0;
   list-style: none;
-  padding: 0 20px;
-  position: relative;
+  display: flex;
 }
-
-#navbar li a{
+.site-navbar ul li a {
+  color: black;
+  padding: 20px;
+  display: block;
   text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  color: #1a1a1a;
-  transition:  0.3s ease;
+  text-transform: uppercase;
 }
-
-#navbar li a:hover,
-#navbar li a.active {
-  color: #088178;
-
+.site-navbar ul li a:hover {
+  background: rgba(255,255,255,.1);
 }
+/* navbar regular css end */
 
-#navbar li a.active::after,
-#navbar li a:hover::after{
-  content: "";
-  width: 30%;
-  height: 2px;
-  background-color: #088178;
-  position: absolute;
-  bottom: -4px;
-  left: 20px;
-}
 
-#mobile {
-  display: none;
-  align-items: center;
-}
-
-#close{
+/* nav-toggler css start */
+.nav-toggler {
+  border: 3px solid black;
+  padding: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  height: 39px;
   display: none;
 }
+.nav-toggler span, 
+.nav-toggler span:before, 
+.nav-toggler span:after {
+  width: 28px;
+  height: 3px;
+  background-color:black;
+  display: block;
+  transition: .3s;
+}
+.nav-toggler span:before {
+  content: '';
+  transform: translateY(-9px);
+}
+.nav-toggler span:after {
+  content: '';
+  transform: translateY(6px);
+}
+.nav-toggler.toggler-open span {
+  background-color: transparent;
+}
+.nav-toggler.toggler-open span:before {
+  transform: translateY(0px) rotate(45deg);
+}
+.nav-toggler.toggler-open span:after {
+  transform: translateY(-3px) rotate(-45deg);
+}
+/* nav-toggler css start */
+
+
+/* intro-area css start */
+
+/* intro-area css end */
+.logo{
+  width: 140px;
+  mix-blend-mode: multiply;
+}
+
+/* mobile breakpoint start */
+@media screen and (max-width: 767px) {
+  .container {
+    max-width: 720px;
+  }
+  /* navbar css for mobile start */
+  .nav-toggler{
+    display: block;
+  }
+  .site-navbar {
+    min-height: 60px;
+  }
+  .site-navbar ul {
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - 60px);
+    left: 0;
+    top: 90px;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #E3E6F3;
+    max-height: 0;
+    overflow: hidden;
+    transition: .3s;
+  }
+  .site-navbar ul li {
+    width: 100%;
+    text-align: center;
+  }
+  .site-navbar ul li a {
+    padding: 25px;
+  }
+  .site-navbar ul li a:hover {
+    background-color: rgba(255,255,255,.1);
+  }
+  .site-navbar ul.open {
+    max-height: 100vh;
+    overflow: visible;
+  }
+  /* navbar css for mobile end */
+}
+
 
 /* Home Page */
 
@@ -555,49 +638,7 @@ body {
   .section-p1{
     padding: 40px 40px;
   }
-  #navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    position: fixed;
-    top: 0;
-    right: -300px;
-    height: 100vh;
-    width: 300px;
-    background-color: #E3E6F3;
-    box-shadow: 0 40px 60px rgb(0, 0, 0, 0.01);
-    padding: 80px 0 0 10px;
-    transition: 0.3s;
-}
-
-#navbar.active{
-  right: 0px;
-}
-#navbar li{
-  margin-bottom: 25px;
-}
-#mobile {
-  display: flex;
-  align-items: center;
-}
-#mobile i{
-  color: #1a1a1a;
-  font-size: 24px;
-  padding-right: 20px;
-}
-
-#close {
-  display: initial;
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  color: #222;
-  font-size: 24px;
-}
-#lg-bag{
-  display: none;
-}
+  
 
 #hero{
   height: 70vh;
@@ -1493,4 +1534,8 @@ text-align: left;
   .totals .totals-item .totals-value {
       width: 40%;
  }
+}
+.active{
+  /* color:#219890; */
+  text-decoration: underline;
 }
