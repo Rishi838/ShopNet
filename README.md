@@ -12,6 +12,7 @@ Welcome to our Ecommerce Store! This is a live website where customers can brows
 3. [Technologies Used](#technologies-used)
 4. [Getting Started](#getting-started)
 5. [Installation](#installation)
+6. [API's](#api's)
 
 ## Introduction
 
@@ -51,6 +52,36 @@ To run the project locally on your machine, follow these instructions.
 3. Start the development server.
 
        npm start
+
+### API's
+
+Base URL: http://shopnet.onrender.com
+
+1. Authorisation API's
+
+       Signup - METHOD/POST  - "Base URL/signup"
+       Login  - METHOD/POST  - "Base URL/login"
+       Verify - METHOD/GET   - "Base URL/Verify"
+       Logout - METHOD/POST  - "BASE URL/logout"
+       Validate-METHOD/POST  - "BASE URL/validate"
+
+2. Cart API's
+
+       Add to Cart     - METHOD/POST   - "Base URL/add_to_cart"
+       Fetch Cart      - METHOD/GET    - "Base URL/fetch_cart"
+       Remove Cart     - METHOD/POST   - "Base URL/remove_from_cart"
+       Change Quantity - METHOD/POST  - "BASE URL/change_quantity"
+
+3. Order API's
+
+       Payment Initiate     - METHOD/POST   - "Base URL/add_to_cart"
+       Fetch Cart      - METHOD/GET    - "Base URL/fetch_cart"
+       Remove Cart     - METHOD/POST   - "Base URL/remove_from_cart"
+       Change Quantity - METHOD/POST  - "BASE URL/change_quantity"
+
+     
+
+     
 
 If you have any questions or need assistance, please feel free to contact our support team at `shopnetauthorisation@gmail.com`.
 
