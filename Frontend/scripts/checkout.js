@@ -1,4 +1,4 @@
-import { postData } from "../frontend_utils/fetch_api.js";
+import { postData } from "../frontend_utils/fetch_api.js"
 async function validate_user() {
   const result = await postData("/validate", {});
   if (result.validate == 1) {
@@ -105,19 +105,25 @@ if (source === "product") {
       const product = product_result.product;
       const subtotal = product.Price * Cart.items[key];
       document.getElementById("ordered_items").innerHTML += `
-      <tr>
-      <td><img src="${product.Image[0]}" alt=""></td>
-      <td>${product.Name}</td>
-      <td>$${product.Price}</td>
-      <td>${Cart.items[key]}</td>
-      <td>$${subtotal}</td>
-      </tr>
+      <div class="product">
+          <div class="product-image">
+            <img src="${product.Image[0]}" />
+          </div>
+          <div class="product-details">
+            <div class="product-title">${product.Name}</div>
+          </div>
+          <div class="product-price">${product.Price}</div>
+          <div class="product-quantity">
+          ${Cart.items[key]}
+          </div>
+          <div class="product-line-price">${subtotal}</div>
+        </div>
       `;
     }
-    document.getElementById("cart_subtotal").innerHTML = `$${Cart.total}`;
+    document.getElementById("cart_subtotal").innerHTML = `${Cart.total}`;
     document.getElementById(
       "cart_total"
-    ).innerHTML = `<strong>$${Cart.total}</strong>`;
+    ).innerHTML = `<strong>${Cart.total}</strong>`;
     document.getElementById("payment").addEventListener("click", async () => {
       const address = document.getElementById("address").value;
       if (address == null || address == "") {

@@ -66,8 +66,8 @@ async function fetch_cart() {
     document.getElementById("cart-items").innerHTML =
       "This user has no elements in his cart";
   } else if (success == 1) {
-    document.getElementById('cart-subtotal').innerHTML = `$${cart_data.total}`
-    document.getElementById('cart-total').innerHTML = `$${cart_data.total}`
+    document.getElementById('cart-subtotal').innerHTML = `${cart_data.total}`
+    document.getElementById('cart-total').innerHTML = `${cart_data.total}`
     document.getElementById("cart-items").innerHTML = "";
     
     for (let key in cart_items) {
@@ -77,15 +77,22 @@ async function fetch_cart() {
       const result = product.product
       const subtotal = quantity * result.Price;
       document.getElementById("cart-items").innerHTML += `
-      <tr>
-      <td><a href="#"><i class="fa fa-times-circle" id="${key}remove" aria-hidden="true" style="color: black;"></i>
-      </a></td>
-      <td><img src="${result.Image[0]}" alt=""></td>
-      <td >${result.Name}</td>
-      <td>$${result.Price}</td>
-      <td><input type="number" id="${key}quantity" value="${quantity}"></td>
-      <td id="${key}total">${subtotal}</td>
-      </tr>
+      <div class="product">
+          <div class="product-image">
+            <img src="${result.Image[0]}" />
+          </div>
+          <div class="product-details">
+            <div class="product-title">${result.Name}</div>
+          </div>
+          <div class="product-price">${result.Price}</div>
+          <div class="product-quantity">
+            <input type="number" id="${key}quantity" value="${quantity}" min="1" />
+          </div>
+          <div class="product-removal">
+            <button class="remove-product" id="${key}remove">Remove</button>
+          </div>
+          <div class="product-line-price" id="${key}total" >${subtotal}</div>
+        </div>
       `;
     }
     // Doing it to resolve closure related issues(otherwise only last event listner is executed)
