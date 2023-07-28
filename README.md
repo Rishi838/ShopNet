@@ -24,9 +24,7 @@ Our Ecommerce Store provides a convenient and secure platform for customers to s
 
 ## Video Demonstration
 
-[![Demo Video Thumbnail](https://github.com/Rishi838/ShopNet/assets/77577908/5a71b669-af8f-48b9-aae1-d0aba3a963d2)](https://youtu.be/6dQbnnrpJSo)
-
-Click the image above to watch the demo video of our Ecommerce Store in action!
+https://github.com/Rishi838/ShopNet/assets/77577908/9fe37b38-ff07-4ad0-bab1-2b9a5efcb371
 
 ## Features
 
