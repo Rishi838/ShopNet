@@ -14,9 +14,10 @@ Welcome to our Ecommerce Store! This is a live website where customers can brows
 5. Getting Started
 6. Installation
 7. API's
-8. Important Links
-9. Frontend Demonstration
-10. Support
+8. PayPal Sanbox credentials
+9. Important Links
+10. Frontend Demonstration
+11. Support
 
 ## Introduction
 
@@ -96,6 +97,13 @@ Base URL: http://shopnet.onrender.com
        All Product          - METHOD/GET    - "Base URL/products"
        Category Products    - METHOD/GET    - "BASE URL/products/category/:categoryId"
        Trending Products    - METHOD/GET    - "BASE URL/trending_products"
+
+## Paypal Sanbox Credentials
+
+PayPal Email ID:
+       sb-lzluu26715056@personal.example.com
+PayPal Password:
+       F12pW#;6
 
 ## Links
 
