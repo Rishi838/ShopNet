@@ -101,8 +101,10 @@ Base URL: http://shopnet.onrender.com
 ## Paypal Sanbox Credentials
 
 PayPal Email ID:
+      
        sb-lzluu26715056@personal.example.com
 PayPal Password:
+       
        F12pW#;6
 
 ## Links
