@@ -1314,7 +1314,7 @@ border-radius: 20px;
  }
 }
 .responsive-table tbody td {
-  text-align: right;
+  text-align: center;
 }
 @media (min-width: 48em) {
   .responsive-table tbody td {
