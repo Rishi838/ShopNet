@@ -8,24 +8,20 @@ Welcome to our Ecommerce Store! This is a live website where customers can brows
 ## Table of Contents
 
 1. Introduction
-2. Video Demonstration
-3. Features
-4. Technologies Used
-5. Getting Started
-6. Installation
-7. API's
-8. PayPal Sanbox credentials
-9. Important Links
-10. Frontend Demonstration
-11. Support
+
+2. Features
+3. Technologies Used
+4. Getting Started
+5. Installation
+6. API's
+7. PayPal Sanbox credentials
+8. Important Links
+9. Frontend Demonstration
+10. Support
 
 ## Introduction
 
 Our Ecommerce Store provides a convenient and secure platform for customers to shop online. With a user-friendly interface and a wide variety of products, we aim to make online shopping a pleasant experience for everyone. The website is live and can be accessed at [ShopNet](https://shopnet.onrender.com).
-
-## Video Demonstration
-
-https://github.com/Rishi838/ShopNet/assets/77577908/9fe37b38-ff07-4ad0-bab1-2b9a5efcb371
 
 ## Features
 
