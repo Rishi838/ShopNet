@@ -64,7 +64,6 @@ async function handleCategoryChange(event) {
   const category = event.target.value;
   createNotification("Category Changed Successfully","success_notification",5000)
   await fetch_products("prod1",`/products/category/${category}`)
-
 }
 
 
